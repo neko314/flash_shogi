@@ -118,12 +118,12 @@ def merge(base_path, out_path, new_name):
         existing_names.add(name)
         added_names.append(name)
 
-    # 1) 符号化されたベースグリフ(28個、フォールバック輪郭)+ cmap登録
+    # 1) 符号化されたベースグリフ(駒28個+空きマス、フォールバック輪郭)+ cmap登録
     # FontForgeが自動で足す .notdef/.null/nonmarkingreturn 等は対象外にする
     # (ベースフォント側に同名グリフがあると衝突するため)。
     cmap_additions = {}
     for glyph_name in shogi.getGlyphOrder():
-        if not glyph_name.startswith(("sente-", "gote-")):
+        if not glyph_name.startswith(("sente-", "gote-", "board-")):
             continue
         copy_glyph(glyph_name)
 

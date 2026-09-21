@@ -38,19 +38,28 @@ ruby bin/flash_shogi --theme=text   # 通常の漢字駒表示（デフォルト
 ruby bin/flash_shogi --theme=pua    # PUA(私用領域)の自作グリフフォントで表示
 ```
 
-`--theme=pua` は、PUA (`U+E000`–`U+E10D`) に将棋駒グリフを割り当てた
-自作フォントが端末側に導入済みであることを前提としています。
+`--theme=pua` は、PUA (`U+E000`–`U+E10D` ほか) に将棋駒グリフを割り当てた
+自作フォント(`font/build/FlashShogiPua.ttf`、COLR/CPALカラーフォントとして
+完成済み)が端末側に導入済みであることを前提としています。
 未導入の環境では文字化け（豆腐や空白）として表示されるため、
 その場合は `--theme=text` を使ってください。
 
-### 自作フォントの導入ワークフロー（想定）
+### 導入手順
 
-1. SVG 等で将棋駒グリフを作成する（先手用14種・後手用14種＝計28グリフ）
-2. FontForge 等で PUA グリフ入りフォント(OTF/TTF)を作成する
-3. macOS の Font Book 経由でインストールする
-4. 対応ターミナルで、インストールしたフォントを使って本アプリを実行する
+1. `font/build/FlashShogiPua.ttf` を `~/Library/Fonts/` に置く
+   - 普段使っているフォント(コーディング用フォントなど)と共存させたい場合は
+     `font/merge_glyphs.py` で普段のフォントに駒グリフを合体できる
+     (Nerd Fontsと同じ要領。詳細は `font/README.md`)
+2. ターミナルのプロファイル設定でフォントを指定する
+3. **iTerm2を推奨**: Profiles → Text → 「Ambiguous characters are
+   double-width」を有効にする。駒・空きマス・筋番号のグリフは Unicode の
+   East Asian Width が未定義(Ambiguous)で、この設定が無いと半角扱いになり
+   盤面がズレる。Terminal.appにはこの設定が無く、既定で半角扱いになる
+   (`lib/renderer.rb` の `BOARD_BORDER` は全角2カラム前提で調整済み)
+4. `ruby bin/flash_shogi --theme=pua` を実行して確認する
 
-推奨ターミナル優先順位: Ghostty > kitty > iTerm2 > Terminal.app（補助的）
+推奨ターミナル優先順位: iTerm2(Ambiguous Width設定あり) > Ghostty / kitty
+(要確認) > Terminal.app(半角扱いのため罫線がズレる、補助的)
 
 開発中のグリフ素材・コードポイント対応表・作業状況は [`font/README.md`](font/README.md) を参照。
 

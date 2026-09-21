@@ -18,6 +18,18 @@
   指定すると他の文字の見た目が崩れる問題があったため、Nerd Fontsと同じ要領で
   普段使っているフォント(Fira Code, Menloで動作確認済み)に駒グリフだけを
   追加注入する方式にした。詳細は「普段使っているフォントと合体させる」節
+- 空きマス記号「・」・筋番号ヘッダー(全角１〜９)も、駒と同じ幅を保証する
+  専用PUAグリフ(`U+E200`〜`U+E209`)にしている。ベースフォント任せだと
+  幅が合わず盤面がズレたため
+- **重要な既知の制約**: 駒・空きマス・ヘッダー数字はPUA(Private Use Area)の
+  ため Unicode の East Asian Width が未定義(Ambiguous)で、ターミナルが
+  全角2カラムとして扱うか半角1カラムとして扱うかは実装依存。
+  **Terminal.appは半角1カラム固定でこれを変更する設定が無い**。
+  **iTerm2は「Profiles → Text → Ambiguous characters are
+  double-width」で全角2カラム扱いに切り替えられ、これで正しく表示できる
+  ことを確認済み**。そのためPUAテーマは iTerm2(要Ambiguous Width設定)を
+  推奨とする。Terminal.appで使う場合は罫線幅の調整が必要
+  (`lib/renderer.rb` の `BOARD_BORDER` 参照)
 
 ## デザイン仕様(確定)
 
@@ -201,6 +213,21 @@ cp font/build/FiraCodeShogi.ttf ~/Library/Fonts/
 
 後手 = 先手 + `0x0100`。後手グリフは先手グリフを180°回転したもの(同じ輪郭・同じ文字)。
 
+盤面まわりの記号(先手/後手の区別なし、回転不要):
+
+| 記号 | コードポイント |
+|---|---|
+| 空きマス「・」 | U+E200 |
+| ヘッダー数字「１」 | U+E201 |
+| ヘッダー数字「２」 | U+E202 |
+| ヘッダー数字「３」 | U+E203 |
+| ヘッダー数字「４」 | U+E204 |
+| ヘッダー数字「５」 | U+E205 |
+| ヘッダー数字「６」 | U+E206 |
+| ヘッダー数字「７」 | U+E207 |
+| ヘッダー数字「８」 | U+E208 |
+| ヘッダー数字「９」 | U+E209 |
+
 ## デザインを調整する
 
 - 色・線の太さ・角の丸み: `generate_svg.rb` の `FILL`/`STROKE`/`INK`/`PROMOTED_INK`/
@@ -233,13 +260,12 @@ cp font/build/FiraCodeShogi.ttf ~/Library/Fonts/
 
 ## 次の工程(未着手)
 
-1. Ghostty / kitty / iTerm2 など他のターミナルでも表示確認する
-   (現時点ではTerminal.appのみ確認済み)。それぞれの「特定コードポイント
-   だけ別フォントを使う」設定のスニペットを書いてここに残す
+1. Ghostty / kitty でも「Ambiguous Width」相当の設定と表示を確認する
+   (iTerm2・Terminal.appは確認済み。iTerm2が現状の最有力)
 2. デザインが最終確定したら、開発用の `FlashShogiPuaDevN` ではなく正式名で
    ビルドし直す
 3. 気になる駒(特に画数の多い龍・馬など)があれば個別に調整する
-4. 配布(公開)する場合、`merge_glyphs.py` の使い方と対応表を独立した
-   ユーザー向け手順としてまとめる(Terminal.appユーザー向け)
+4. 配布(公開)する場合、`merge_glyphs.py` の使い方と対応表・iTerm2の
+   Ambiguous Width設定を独立したユーザー向け手順としてまとめる
 
 推奨ターミナル優先順位: Ghostty > kitty > iTerm2 > Terminal.app(補助的)。
