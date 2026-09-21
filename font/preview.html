@@ -1,0 +1,515 @@
+<title>駒グリフ台帳</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+  :root {
+    --paper: #f3ede0;
+    --paper-raised: #fbf7ee;
+    --ink: #241d14;
+    --ink-soft: #6b5f4c;
+    --line: #d8cdb4;
+    --accent: #9c3b28;
+    --accent-soft: #c98a3a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1c1712;
+      --paper-raised: #262019;
+      --ink: #f0e8d8;
+      --ink-soft: #b7a98d;
+      --line: #4a4033;
+      --accent: #e07a5f;
+      --accent-soft: #e0a84c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1c1712;
+    --paper-raised: #262019;
+    --ink: #f0e8d8;
+    --ink-soft: #b7a98d;
+    --line: #4a4033;
+    --accent: #e07a5f;
+    --accent-soft: #e0a84c;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', sans-serif;
+    padding-inline: max(20px, env(safe-area-inset-left, 0px));
+    padding-block: 32px 64px;
+  }
+
+  .wrap { max-width: 1040px; margin: 0 auto; }
+
+  header { margin-bottom: 36px; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  header p {
+    color: var(--ink-soft);
+    max-width: 62ch;
+    line-height: 1.7;
+    margin: 0;
+    font-size: 14.5px;
+  }
+
+  section { margin-top: 40px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head h2 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .section-head span {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+    gap: 14px;
+  }
+
+  .cell {
+    margin: 0;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 8px 8px;
+    text-align: center;
+  }
+  .glyph {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 8px;
+  }
+  .glyph svg { width: 100%; height: 100%; display: block; }
+  .glyph svg path { stroke: var(--ink); }
+  .glyph svg text { fill: var(--ink); }
+
+  figcaption .label {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  figcaption .meta {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-soft);
+    opacity: .75;
+    margin-top: 4px;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+  }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">flash_shogi / PUA glyphs</p>
+    <h1>駒グリフ台帳 — プレースホルダー版</h1>
+    <p>
+      U+E000–U+E00D(先手14種)と U+E100–U+E10D(後手14種、180°回転)のプレースホルダーです。
+      まだ五角形の輪郭+システムフォントの漢字を組んだだけの仮デザインで、FontForge に取り込む前段階の確認用。
+      ここから SVG を手描きデザインに差し替えて、同じファイル名で font/svg/ を上書きすれば見た目が更新されます。
+    </p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>先手(正位置)</h2>
+      <span>U+E000–U+E00D</span>
+    </div>
+    <div class="grid">
+      <figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">歩</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">歩</span>
+    <span class="meta">sente-fu<br>U+E000</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">香</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">香</span>
+    <span class="meta">sente-kyo<br>U+E001</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">桂</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">桂</span>
+    <span class="meta">sente-kei<br>U+E002</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">銀</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">銀</span>
+    <span class="meta">sente-gin<br>U+E003</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">金</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">金</span>
+    <span class="meta">sente-kin<br>U+E004</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">角</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">角</span>
+    <span class="meta">sente-kaku<br>U+E005</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">飛</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">飛</span>
+    <span class="meta">sente-hisha<br>U+E006</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">玉</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">玉</span>
+    <span class="meta">sente-gyoku<br>U+E007</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">と</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">と</span>
+    <span class="meta">sente-to<br>U+E008</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="42" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">成</text>
+<text x="50" y="78" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">香</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">成香</span>
+    <span class="meta">sente-narikyo<br>U+E009</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="42" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">成</text>
+<text x="50" y="78" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">桂</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">成桂</span>
+    <span class="meta">sente-narikei<br>U+E00A</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="42" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">成</text>
+<text x="50" y="78" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">銀</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">成銀</span>
+    <span class="meta">sente-narigin<br>U+E00B</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">馬</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">馬</span>
+    <span class="meta">sente-uma<br>U+E00C</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g>
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">龍</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">龍</span>
+    <span class="meta">sente-ryu<br>U+E00D</span>
+  </figcaption>
+</figure>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>後手(180°回転)</h2>
+      <span>U+E100–U+E10D</span>
+    </div>
+    <div class="grid">
+      <figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">歩</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">歩</span>
+    <span class="meta">gote-fu<br>U+E100</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">香</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">香</span>
+    <span class="meta">gote-kyo<br>U+E101</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">桂</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">桂</span>
+    <span class="meta">gote-kei<br>U+E102</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">銀</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">銀</span>
+    <span class="meta">gote-gin<br>U+E103</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">金</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">金</span>
+    <span class="meta">gote-kin<br>U+E104</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">角</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">角</span>
+    <span class="meta">gote-kaku<br>U+E105</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">飛</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">飛</span>
+    <span class="meta">gote-hisha<br>U+E106</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">玉</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">玉</span>
+    <span class="meta">gote-gyoku<br>U+E107</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">と</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">と</span>
+    <span class="meta">gote-to<br>U+E108</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="42" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">成</text>
+<text x="50" y="78" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">香</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">成香</span>
+    <span class="meta">gote-narikyo<br>U+E109</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="42" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">成</text>
+<text x="50" y="78" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">桂</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">成桂</span>
+    <span class="meta">gote-narikei<br>U+E10A</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="42" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">成</text>
+<text x="50" y="78" font-size="30" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">銀</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">成銀</span>
+    <span class="meta">gote-narigin<br>U+E10B</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">馬</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">馬</span>
+    <span class="meta">gote-uma<br>U+E10C</span>
+  </figcaption>
+</figure>
+<figure class="cell">
+  <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="rotate(180 50 50)">
+    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+    <text x="50" y="66" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle">龍</text>
+  </g>
+</svg></div>
+  <figcaption>
+    <span class="label">龍</span>
+    <span class="meta">gote-ryu<br>U+E10D</span>
+  </figcaption>
+</figure>
+
+    </div>
+  </section>
+
+  <footer>
+    駒種インデックス: 0=歩 1=香 2=桂 3=銀 4=金 5=角 6=飛 7=玉 8=と 9=成香 10=成桂 11=成銀 12=馬 13=龍(引き継ぎ仕様書 4-6-2)
+  </footer>
+</div>

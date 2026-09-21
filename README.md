@@ -52,6 +52,8 @@ ruby bin/flash_shogi --theme=pua    # PUA(私用領域)の自作グリフフォ�
 
 推奨ターミナル優先順位: Ghostty > kitty > iTerm2 > Terminal.app（補助的）
 
+開発中のグリフ素材・コードポイント対応表・作業状況は [`font/README.md`](font/README.md) を参照。
+
 PUAのコードポイント割り当ては `lib/renderer.rb` の `PUA_SENTE_BASE` /
 `PUA_GOTE_OFFSET` / `PUA_KIND_INDEX` にまとまっています。詳細な割り当て表は
 引き継ぎ仕様書の 4-6 節を参照してください。
