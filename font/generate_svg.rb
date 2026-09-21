@@ -42,15 +42,21 @@ def pentagon_path
   "M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z"
 end
 
+# 五角形(駒尖が上・底辺がy=96)の視覚的な重心はバウンディングボックス中央(y=50)より
+# 下にある。text-anchor="middle" + dominant-baseline="central" で、指定した y を
+# 文字そのものの中心として扱わせ、その y を重心に合わせることで駒の中に文字が
+# 収まって見えるようにする。
+GLYPH_CENTER_Y = 57
+
 def text_markup(label)
   if label.size == 1
     <<~SVG
-      <text x="50" y="66" font-size="46" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle">#{label[0]}</text>
+      <text x="50" y="#{GLYPH_CENTER_Y}" font-size="46" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{label[0]}</text>
     SVG
   else
     <<~SVG
-      <text x="50" y="42" font-size="30" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle">#{label[0]}</text>
-      <text x="50" y="78" font-size="30" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle">#{label[1]}</text>
+      <text x="50" y="#{GLYPH_CENTER_Y - 17}" font-size="30" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{label[0]}</text>
+      <text x="50" y="#{GLYPH_CENTER_Y + 17}" font-size="30" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{label[1]}</text>
     SVG
   end
 end
