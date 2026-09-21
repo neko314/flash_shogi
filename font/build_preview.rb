@@ -55,16 +55,19 @@ PENTAGON = "M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z"
 def variant_svg(main:, badge: nil, badge_font: MINCHO, badge_size: 15, badge_x: 50, badge_y: 21,
                 main_size: 46, main_y: 57, main_font: MINCHO, main_style: nil,
                 double_border: false, tint: nil, divider: false, notch: false)
+  # tint はターミナル側のANSI色指定を模したもの: 実際のフォントでは駒の輪郭も
+  # 文字も同じグリフの一部(単色インク)なので、色を変えるなら両方変わる。
+  color = tint || "#000"
+
   border = if double_border
-             %(<path d="#{PENTAGON}" fill="none" stroke="#000" stroke-width="3"/>
-               <path d="M 50,10 L 82,29 L 87,91 L 13,91 L 18,29 Z" fill="none" stroke="#000" stroke-width="2"/>)
+             %(<path d="#{PENTAGON}" fill="none" stroke="#{color}" stroke-width="3"/>
+               <path d="M 50,10 L 82,29 L 87,91 L 13,91 L 18,29 Z" fill="none" stroke="#{color}" stroke-width="2"/>)
            elsif notch
-             %(<path d="M 50,4 L 88,26 L 93,96 L 76,96 L 76,88 L 24,88 L 24,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>)
+             %(<path d="M 50,4 L 88,26 L 93,96 L 76,96 L 76,88 L 24,88 L 24,96 L 7,96 L 12,26 Z" fill="none" stroke="#{color}" stroke-width="4" stroke-linejoin="round"/>)
            else
-             %(<path d="#{PENTAGON}" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>)
+             %(<path d="#{PENTAGON}" fill="none" stroke="#{color}" stroke-width="4" stroke-linejoin="round"/>)
            end
 
-  color = tint || "#000"
   style_attr = main_style ? %( font-style="#{main_style}") : ""
 
   badge_markup = if badge
@@ -102,6 +105,7 @@ VARIANTS = [
   { id: "M", title: "細字の草書(駒全体)", desc: "Yuji Syuku。繊細・行書寄りの崩し", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_LIGHT, badge_size: 19, badge_y: 20, main_font: SOSHO_LIGHT) },
   { id: "N", title: "流れる草書(駒全体)", desc: "Yuji Mai。舞うような、より大きく崩れた字形", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_FLOW, badge_size: 19, badge_y: 20, main_font: SOSHO_FLOW) },
   { id: "O", title: "流れる草書(バッジなし)", desc: "Yuji Mai を地の文字だけに使う", svg: variant_svg(main: "香", main_font: SOSHO_FLOW) },
+  { id: "P", title: "M案 + 赤字", desc: "Yuji Syuku(駒全体)を赤色に。輪郭も文字も同じインクなので両方赤くなる想定", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_LIGHT, badge_size: 19, badge_y: 20, main_font: SOSHO_LIGHT, tint: "#c0392b") },
 ].freeze
 
 def variant_card(v)
