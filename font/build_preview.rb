@@ -349,8 +349,6 @@ html = <<~HTML
       margin: 0 auto 8px;
     }
     .glyph svg { width: 100%; height: 100%; display: block; }
-    .glyph svg path { stroke: var(--ink); }
-    .glyph svg text { fill: var(--ink); }
 
     figcaption .label {
       display: block;
@@ -409,11 +407,6 @@ html = <<~HTML
       gap: 6px;
     }
     .size-glyph svg { width: 100%; height: 100%; display: block; }
-    .size-glyph svg path { stroke: var(--ink); }
-    .size-glyph svg text { fill: var(--ink); }
-    /* variant-glyph は色分け案(tint)を試す場所なので、.size-glyph と違って
-       fill/stroke を強制しない。tint 無しの案は currentColor で下の color
-       プロパティに追従し、tint 有りの案(H, P)はSVG側の指定色がそのまま出る。 */
     .variant-glyph { color: var(--ink); }
     .variant-glyph svg { width: 100%; height: 100%; display: block; }
     .size-cell span {

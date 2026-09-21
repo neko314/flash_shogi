@@ -109,8 +109,6 @@
     margin: 0 auto 8px;
   }
   .glyph svg { width: 100%; height: 100%; display: block; }
-  .glyph svg path { stroke: var(--ink); }
-  .glyph svg text { fill: var(--ink); }
 
   figcaption .label {
     display: block;
@@ -169,11 +167,6 @@
     gap: 6px;
   }
   .size-glyph svg { width: 100%; height: 100%; display: block; }
-  .size-glyph svg path { stroke: var(--ink); }
-  .size-glyph svg text { fill: var(--ink); }
-  /* variant-glyph は色分け案(tint)を試す場所なので、.size-glyph と違って
-     fill/stroke を強制しない。tint 無しの案は currentColor で下の color
-     プロパティに追従し、tint 有りの案(H, P)はSVG側の指定色がそのまま出る。 */
   .variant-glyph { color: var(--ink); }
   .variant-glyph svg { width: 100%; height: 100%; display: block; }
   .size-cell span {
@@ -1534,9 +1527,9 @@
   <div class="size-cells"><div class="size-cell">
   <div class="size-glyph" style="width:56px;height:56px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <span>56px</span>
@@ -1544,9 +1537,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <span>32px</span>
@@ -1554,9 +1547,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:22px;height:22px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <span>22px</span>
@@ -1564,9 +1557,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <span>16px</span>
@@ -1578,9 +1571,9 @@
   <div class="size-cells"><div class="size-cell">
   <div class="size-glyph" style="width:56px;height:56px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <span>56px</span>
@@ -1588,9 +1581,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <span>32px</span>
@@ -1598,9 +1591,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:22px;height:22px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <span>22px</span>
@@ -1608,9 +1601,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <span>16px</span>
@@ -1622,9 +1615,9 @@
   <div class="size-cells"><div class="size-cell">
   <div class="size-glyph" style="width:56px;height:56px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <span>56px</span>
@@ -1632,9 +1625,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <span>32px</span>
@@ -1642,9 +1635,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:22px;height:22px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <span>22px</span>
@@ -1652,9 +1645,9 @@
 <div class="size-cell">
   <div class="size-glyph" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <span>16px</span>
@@ -1674,8 +1667,8 @@
       <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">歩</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">歩</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1686,8 +1679,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1698,8 +1691,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1710,8 +1703,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1722,8 +1715,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">金</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">金</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1734,8 +1727,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">角</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">角</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1746,8 +1739,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">飛</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">飛</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1758,8 +1751,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">玉</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">玉</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1770,8 +1763,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">と</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">と</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1782,9 +1775,9 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1795,9 +1788,9 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1808,9 +1801,9 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1821,8 +1814,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">馬</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">馬</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1833,8 +1826,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">龍</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">龍</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1855,8 +1848,8 @@
       <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">歩</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">歩</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1867,8 +1860,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1879,8 +1872,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1891,8 +1884,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1903,8 +1896,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">金</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">金</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1915,8 +1908,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">角</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">角</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1927,8 +1920,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">飛</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">飛</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1939,8 +1932,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">玉</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#4a3016" text-anchor="middle" dominant-baseline="central">玉</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1951,8 +1944,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">と</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">と</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1963,9 +1956,9 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">香</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">香</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1976,9 +1969,9 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">桂</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">桂</text>
   </g>
 </svg></div>
   <figcaption>
@@ -1989,9 +1982,9 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">成</text>
-<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">銀</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="21" font-size="15" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">成</text>
+<text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">銀</text>
   </g>
 </svg></div>
   <figcaption>
@@ -2002,8 +1995,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">馬</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">馬</text>
   </g>
 </svg></div>
   <figcaption>
@@ -2014,8 +2007,8 @@
 <figure class="cell">
   <div class="glyph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g transform="rotate(180 50 50)">
-    <path d="M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">龍</text>
+    <path d="M 53.46,6.0 L 84.54,24.0 Q 88,26 88.28,29.99 L 92.72,92.01 Q 93,96 89.0,96.0 L 11.0,96.0 Q 7,96 7.28,92.01 L 11.72,29.99 Q 12,26 15.46,24.0 L 46.54,6.0 Q 50,4 53.46,6.0 Z" fill="#f5e2b8" stroke="#b9824a" stroke-width="3" stroke-linejoin="round"/>
+    <text x="50" y="57" font-size="46" font-family="'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif" font-weight="700" fill="#c0392b" text-anchor="middle" dominant-baseline="central">龍</text>
   </g>
 </svg></div>
   <figcaption>
