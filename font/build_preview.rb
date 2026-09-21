@@ -47,6 +47,8 @@ gote_cells = ORDER.map { |k| card(k, "gote") }.join
 # 五角形の角を丸めたパスを作る(各頂点を半径 radius だけ手前で切り、
 # 頂点そのものを制御点にした二次ベジェで結ぶ)。
 
+MINCHO = "'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif"
+
 def rounded_polygon_path(points, radius)
   n = points.size
   before = []
@@ -73,29 +75,31 @@ def rounded_polygon_path(points, radius)
 end
 
 PENTAGON_POINTS = [[50, 4], [88, 26], [93, 96], [7, 96], [12, 26]].freeze
-ROUNDED_PENTAGON = rounded_polygon_path(PENTAGON_POINTS, 14)
-MARU_GOTHIC = "'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', sans-serif"
+# 角を丸めすぎない(尖っていてよい)ので半径は小さめに留める。
+ROUNDED_PENTAGON = rounded_polygon_path(PENTAGON_POINTS, 4)
 
-def illust_svg(main:, badge: nil, fill: "#f5e2b8", stroke: "#b9824a", ink: "#4a3016")
-  badge_markup = badge ? %(<text x="50" y="21" font-size="19" font-family="#{MARU_GOTHIC}" font-weight="900" fill="#{ink}" text-anchor="middle" dominant-baseline="central">#{badge}</text>) : ""
+def illust_svg(main:, badge: nil, fill: "#f5e2b8", stroke: "#b9824a", ink: "#4a3016", badge_ink: nil)
+  badge_ink ||= ink
+  badge_markup = badge ? %(<text x="50" y="21" font-size="19" font-family="#{MINCHO}" font-weight="700" fill="#{badge_ink}" text-anchor="middle" dominant-baseline="central">#{badge}</text>) : ""
   <<~SVG
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <g>
-        <path d="#{ROUNDED_PENTAGON}" fill="#{fill}" stroke="#{stroke}" stroke-width="5" stroke-linejoin="round"/>
+        <path d="#{ROUNDED_PENTAGON}" fill="#{fill}" stroke="#{stroke}" stroke-width="3" stroke-linejoin="round"/>
         #{badge_markup}
-        <text x="50" y="57" font-size="46" font-family="#{MARU_GOTHIC}" font-weight="900" fill="#{ink}" text-anchor="middle" dominant-baseline="central">#{main}</text>
+        <text x="50" y="57" font-size="46" font-family="#{MINCHO}" font-weight="700" fill="#{ink}" text-anchor="middle" dominant-baseline="central">#{main}</text>
       </g>
     </svg>
   SVG
 end
 
 ILLUST_VARIANTS = [
-  { id: "Q1", title: "基本形(歩)", desc: "クリーム地+丸ゴシック", svg: illust_svg(main: "歩") },
+  { id: "Q1", title: "基本形(歩)", desc: "クリーム地+明朝、枠は細め・角は控えめ", svg: illust_svg(main: "歩") },
   { id: "Q2", title: "玉", desc: "同じ配色で玉将", svg: illust_svg(main: "玉") },
   { id: "Q3", title: "飛", desc: "同じ配色で飛車", svg: illust_svg(main: "飛") },
-  { id: "Q4", title: "成香(バッジ方式と併用)", desc: "小さい成+地の文字、丸ゴシック", svg: illust_svg(main: "香", badge: "成") },
+  { id: "Q4", title: "成香(バッジ方式と併用)", desc: "小さい成+地の文字、いずれも明朝", svg: illust_svg(main: "香", badge: "成") },
   { id: "Q5", title: "配色違い(白木)", desc: "より白っぽい木地", svg: illust_svg(main: "歩", fill: "#f8efd8", stroke: "#c9a877", ink: "#5c4526") },
   { id: "Q6", title: "配色違い(濃いめ)", desc: "コントラスト強め", svg: illust_svg(main: "歩", fill: "#eccf8f", stroke: "#8a5a28", ink: "#3a230f") },
+  { id: "Q7", title: "成香 + 赤字", desc: "木地・枠はそのまま、成の文字(バッジ+地の文字)だけ赤に", svg: illust_svg(main: "香", badge: "成", ink: "#c0392b", badge_ink: "#c0392b") },
 ].freeze
 
 def illust_card(v)
@@ -124,7 +128,6 @@ illust_rows = ILLUST_VARIANTS.map { |v| illust_card(v) }.join
 
 # --- 成駒バッジの改善案比較 -------------------------------------------------
 
-MINCHO = "'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif"
 GOTHIC = "'Hiragino Sans', 'Yu Gothic', sans-serif"
 SOSHO = "'Yuji Boku', serif"
 SOSHO_LIGHT = "'Yuji Syuku', serif"
@@ -237,7 +240,7 @@ size_check_rows = %w[narikyo narikei narigin].map { |k| size_check_row(k) }.join
 html = <<~HTML
   <title>駒グリフ台帳</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=Yuji+Boku&family=Yuji+Syuku&family=Yuji+Mai&family=Zen+Maru+Gothic:wght@700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=Yuji+Boku&family=Yuji+Syuku&family=Yuji+Mai&display=swap');
 
     :root {
       --paper: #f3ede0;
