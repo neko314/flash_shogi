@@ -46,13 +46,6 @@ PIECES.freeze
 
 SENTE_BASE = 0xE000
 GOTE_BASE = 0xE100
-# 空きマス記号「・」、筋番号ヘッダー(全角１〜９)専用のコードポイント。
-# 駒(U+E000台/U+E100台)とは別枠。先手/後手の区別が無い(回転不要)ので
-# それぞれ1つずつ。ヘッダーの全角数字はベースフォント側の物に頼ると幅が
-# 駒グリフと一致せず、盤面上部の筋番号と実際の列がズレるため
-# (要検証で発生を確認)。
-EMPTY_CODEPOINT = 0xE200
-DIGIT_BASE = 0xE201 # 0xE201='1' 〜 0xE209='9'
 
 FILL = "#f5e2b8"    # クリーム地
 STROKE = "#b9824a"  # 木の縁
@@ -192,36 +185,10 @@ def char_svg(label, rotate:)
   SVG
 end
 
-# --- 盤面まわりの記号(空きマス「・」、筋番号ヘッダー) -----------------------
-# 駒グリフ(先手14+後手14)とは独立して、ちょうど同じ幅(全角2文字分)になる
-# 専用グリフを用意する。ベースフォント側の文字に頼ると、フォントによって
-# 幅が駒グリフと一致せず盤面の列や筋番号ヘッダーがズレるため
-# (要検証で発生を確認)。
-
-def symbol_svg(char, color)
-  <<~SVG
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      #{path_node(char, "main", color)}
-    </svg>
-  SVG
-end
-
 FileUtils.mkdir_p(OUT_DIR)
 FileUtils.mkdir_p(LAYER_DIR)
 
 manifest = []
-
-BOARD_SYMBOLS = { "board-empty" => [EMPTY_CODEPOINT, "・"] }
-("1".."9").each { |d| BOARD_SYMBOLS["board-digit#{d}"] = [DIGIT_BASE + d.to_i - 1, "０１２３４５６７８９"[d.to_i]] }
-
-BOARD_SYMBOLS.each do |name, (codepoint, char)|
-  File.write(File.join(OUT_DIR, "#{name}.svg"), symbol_svg(char, INK))
-  File.write(File.join(LAYER_DIR, "#{name}.char.svg"), symbol_svg(char, "#000"))
-  manifest << {
-    name: name, codepoint: codepoint, label: char,
-    layers: [{ glyph: "#{name}.char", color: :ink }],
-  }
-end
 
 PIECES.each do |piece|
   sente_cp = SENTE_BASE + piece[:codepoint_offset]

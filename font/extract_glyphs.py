@@ -20,7 +20,7 @@ from fontTools.pens.transformPen import TransformPen
 FONT_PATH = "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"
 FONT_NUMBER = 2  # Hiragino Mincho ProN W6 (太め)
 
-CHARS = list("歩香桂銀金角飛玉と馬龍成・１２３４５６７８９")
+CHARS = list("歩香桂銀金角飛玉と馬龍成")
 
 OUT_PATH = os.path.join(os.path.dirname(__file__), "glyph_paths.json")
 

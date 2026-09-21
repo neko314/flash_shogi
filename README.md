@@ -44,19 +44,23 @@ ruby bin/flash_shogi --theme=pua    # PUA(私用領域)の自作グリフフォ�
 未導入の環境では文字化け（豆腐や空白）として表示されるため、
 その場合は `--theme=text` を使ってください。
 
-### 導入手順
+### 導入手順(iTerm2推奨)
 
 1. `font/build/FlashShogiPua.ttf` を `~/Library/Fonts/` に置く
-   - 普段使っているフォント(コーディング用フォントなど)と共存させたい場合は
-     `font/merge_glyphs.py` で普段のフォントに駒グリフを合体できる
-     (Nerd Fontsと同じ要領。詳細は `font/README.md`)
-2. ターミナルのプロファイル設定でフォントを指定する
-3. **iTerm2を推奨**: Profiles → Text → 「Ambiguous characters are
-   double-width」を有効にする。駒・空きマス・筋番号のグリフは Unicode の
-   East Asian Width が未定義(Ambiguous)で、この設定が無いと半角扱いになり
-   盤面がズレる。Terminal.appにはこの設定が無く、既定で半角扱いになる
-   (`lib/renderer.rb` の `BOARD_BORDER` は全角2カラム前提で調整済み)
-4. `ruby bin/flash_shogi --theme=pua` を実行して確認する
+2. iTerm2の環境設定 → Profiles → Text で:
+   - 「Font」は普段使っているフォントのままでよい
+   - 「Use a different font for non-ASCII text」を有効にし、
+     Non-ASCII Fontを `Flash Shogi PUA` にする(駒以外の非ASCII文字は
+     さらにOSのフォールバックに進むので、漢字等の表示は崩れない)
+   - 「Ambiguous characters are double-width」を有効にする。駒グリフは
+     Unicode の East Asian Width が未定義(Ambiguous)で、この設定が無いと
+     半角(1カラム)扱いになり盤面がズレる
+3. `ruby bin/flash_shogi --theme=pua` を実行して確認する
+
+Terminal.appには上記の「非ASCIIだけ別フォント」「Ambiguous Width」設定が
+無く、駒グリフが常に半角扱いになってしまう。Terminal.appを使う場合は
+`font/merge_glyphs.py` で普段のフォントに駒グリフを合体させる方法がある
+(Nerd Fontsと同じ要領。詳細は `font/README.md`)。
 
 推奨ターミナル優先順位: iTerm2(Ambiguous Width設定あり) > Ghostty / kitty
 (要確認) > Terminal.app(半角扱いのため罫線がズレる、補助的)
