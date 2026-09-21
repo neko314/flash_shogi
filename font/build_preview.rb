@@ -47,6 +47,7 @@ gote_cells = ORDER.map { |k| card(k, "gote") }.join
 
 MINCHO = "'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif"
 GOTHIC = "'Hiragino Sans', 'Yu Gothic', sans-serif"
+SOSHO = "'Yuji Boku', serif"
 PENTAGON = "M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z"
 
 def variant_svg(main:, badge: nil, badge_font: MINCHO, badge_size: 15, badge_x: 50, badge_y: 21,
@@ -93,6 +94,9 @@ VARIANTS = [
   { id: "G", title: "傍点のみ", desc: "「成」の代わりに点ひとつ", svg: variant_svg(main: "香", badge: "・", badge_size: 26, badge_y: 18) },
   { id: "H", title: "色分け(レンダラー案)", desc: "バッジなし、色だけ変える(フォントとは別レイヤー)", svg: variant_svg(main: "香", tint: "#b0402c") },
   { id: "I", title: "斜体(バッジなし)", desc: "成り駒だけ字を傾ける", svg: variant_svg(main: "香", main_style: "italic") },
+  { id: "J", title: "草書体バッジ", desc: "「成」だけ毛筆(Yuji Boku)に、地の文字は明朝のまま", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO, badge_size: 19, badge_y: 20) },
+  { id: "K", title: "草書体(駒全体)", desc: "「成」も地の文字も毛筆に。実物の駒に近い雰囲気", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO, badge_size: 19, badge_y: 20, main_font: SOSHO) },
+  { id: "L", title: "草書体のみ(バッジなし)", desc: "バッジを足さず、字そのものを毛筆にして差別化", svg: variant_svg(main: "香", main_font: SOSHO) },
 ].freeze
 
 def variant_card(v)
@@ -143,7 +147,7 @@ size_check_rows = %w[narikyo narikei narigin].map { |k| size_check_row(k) }.join
 html = <<~HTML
   <title>駒グリフ台帳</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=Yuji+Boku&display=swap');
 
     :root {
       --paper: #f3ede0;
