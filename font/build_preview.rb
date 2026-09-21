@@ -43,6 +43,82 @@ end
 sente_cells = ORDER.map { |k| card(k, "sente") }.join
 gote_cells = ORDER.map { |k| card(k, "gote") }.join
 
+# --- 成駒バッジの改善案比較 -------------------------------------------------
+
+MINCHO = "'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif"
+GOTHIC = "'Hiragino Sans', 'Yu Gothic', sans-serif"
+PENTAGON = "M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z"
+
+def variant_svg(main:, badge: nil, badge_font: MINCHO, badge_size: 15, badge_x: 50, badge_y: 21,
+                main_size: 46, main_y: 57, main_font: MINCHO, main_style: nil,
+                double_border: false, tint: nil, divider: false, notch: false)
+  border = if double_border
+             %(<path d="#{PENTAGON}" fill="none" stroke="#000" stroke-width="3"/>
+               <path d="M 50,10 L 82,29 L 87,91 L 13,91 L 18,29 Z" fill="none" stroke="#000" stroke-width="2"/>)
+           elsif notch
+             %(<path d="M 50,4 L 88,26 L 93,96 L 76,96 L 76,88 L 24,88 L 24,96 L 7,96 L 12,26 Z" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>)
+           else
+             %(<path d="#{PENTAGON}" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>)
+           end
+
+  color = tint || "#000"
+  style_attr = main_style ? %( font-style="#{main_style}") : ""
+
+  badge_markup = if badge
+                   %(<text x="#{badge_x}" y="#{badge_y}" font-size="#{badge_size}" font-family="#{badge_font}" font-weight="800" fill="#{color}" text-anchor="middle" dominant-baseline="central">#{badge}</text>)
+                 else
+                   ""
+                 end
+  divider_markup = divider ? %(<line x1="32" y1="31" x2="68" y2="31" stroke="#{color}" stroke-width="2"/>) : ""
+
+  <<~SVG
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <g>
+        #{border}
+        #{badge_markup}
+        #{divider_markup}
+        <text x="50" y="#{main_y}" font-size="#{main_size}" font-family="#{main_font}" font-weight="700" fill="#{color}" text-anchor="middle" dominant-baseline="central"#{style_attr}>#{main}</text>
+      </g>
+    </svg>
+  SVG
+end
+
+VARIANTS = [
+  { id: "A", title: "現行案", desc: "明朝バッジ、そのまま", svg: variant_svg(main: "香", badge: "成") },
+  { id: "B", title: "ゴシックバッジ", desc: "バッジだけ太いゴシック体に", svg: variant_svg(main: "香", badge: "成", badge_font: GOTHIC, badge_size: 16) },
+  { id: "C", title: "バッジ拡大+地の文字縮小", desc: "成=19px / 香=40px", svg: variant_svg(main: "香", badge: "成", badge_font: GOTHIC, badge_size: 19, badge_y: 20, main_size: 40, main_y: 60) },
+  { id: "D", title: "仕切り線", desc: "バッジの下に区切り線", svg: variant_svg(main: "香", badge: "成", badge_font: GOTHIC, badge_size: 16, divider: true, main_y: 60, main_size: 42) },
+  { id: "E", title: "二重枠線(バッジなし)", desc: "文字はそのまま、外枠を二重線に", svg: variant_svg(main: "香", double_border: true) },
+  { id: "F", title: "角を切り欠く(バッジなし)", desc: "五角形の下角を落として差別化", svg: variant_svg(main: "香", notch: true) },
+  { id: "G", title: "傍点のみ", desc: "「成」の代わりに点ひとつ", svg: variant_svg(main: "香", badge: "・", badge_size: 26, badge_y: 18) },
+  { id: "H", title: "色分け(レンダラー案)", desc: "バッジなし、色だけ変える(フォントとは別レイヤー)", svg: variant_svg(main: "香", tint: "#b0402c") },
+  { id: "I", title: "斜体(バッジなし)", desc: "成り駒だけ字を傾ける", svg: variant_svg(main: "香", main_style: "italic") },
+].freeze
+
+def variant_card(v)
+  sizes = [56, 32, 22, 16]
+  cells = sizes.map do |px|
+    <<~HTML
+      <div class="size-cell">
+        <div class="size-glyph" style="width:#{px}px;height:#{px}px">#{v[:svg]}</div>
+        <span>#{px}px</span>
+      </div>
+    HTML
+  end.join
+  <<~HTML
+    <div class="variant-row">
+      <div class="variant-label">
+        <span class="variant-id">#{v[:id]}</span>
+        <span class="variant-title">#{v[:title]}</span>
+        <span class="variant-desc">#{v[:desc]}</span>
+      </div>
+      <div class="size-cells">#{cells}</div>
+    </div>
+  HTML
+end
+
+variant_rows = VARIANTS.map { |v| variant_card(v) }.join
+
 def size_check_row(key)
   svg = read_svg("sente-#{key}")
   sizes = [56, 32, 22, 16]
@@ -243,6 +319,51 @@ html = <<~HTML
       color: var(--ink-soft);
       font-variant-numeric: tabular-nums;
     }
+
+    .variant-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .variant-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+    .variant-label {
+      width: 220px;
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .variant-id {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--paper-raised);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .variant-title {
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+    .variant-desc {
+      font-size: 11.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
   </style>
 
   <div class="wrap">
@@ -258,7 +379,17 @@ html = <<~HTML
 
     <section>
       <div class="section-head">
-        <h2>成香・成桂・成銀の縮小確認</h2>
+        <h2>成駒バッジの改善案比較</h2>
+        <span>「成香」で9パターン試作</span>
+      </div>
+      <div class="variant-list">
+        #{variant_rows}
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>成香・成桂・成銀の縮小確認(現行案)</h2>
         <span>ターミナルの文字サイズを想定</span>
       </div>
       <div class="size-check">
