@@ -55,30 +55,29 @@ PENTAGON = "M 50,4 L 88,26 L 93,96 L 7,96 L 12,26 Z"
 def variant_svg(main:, badge: nil, badge_font: MINCHO, badge_size: 15, badge_x: 50, badge_y: 21,
                 main_size: 46, main_y: 57, main_font: MINCHO, main_style: nil,
                 double_border: false, tint: nil, divider: false, notch: false)
-  # tint はターミナル側のANSI色指定を模したもの: 実際のフォントでは駒の輪郭も
-  # 文字も同じグリフの一部(単色インク)なので、色を変えるなら両方変わる。
-  # tint が無い場合は currentColor にして、CSS側(.variant-glyph { color })で
-  # ライト/ダークテーマに追従できるようにする。tint 指定時はそれを上書きしない
-  # よう、CSS側は .variant-glyph に fill/stroke の強制ルールを持たせない。
-  color = tint || "currentColor"
+  # 輪郭(border)は常にテーマの標準色(currentColor)。tint は文字色だけに効く。
+  # ※ 実フォントで枠と文字を別色にするには単色グリフでは不可能で、COLR/CPAL
+  #   のようなカラーフォント形式が要る。ここではプレビュー上の見た目確認用。
+  border_color = "currentColor"
+  text_color = tint || "currentColor"
 
   border = if double_border
-             %(<path d="#{PENTAGON}" fill="none" stroke="#{color}" stroke-width="3"/>
-               <path d="M 50,10 L 82,29 L 87,91 L 13,91 L 18,29 Z" fill="none" stroke="#{color}" stroke-width="2"/>)
+             %(<path d="#{PENTAGON}" fill="none" stroke="#{border_color}" stroke-width="3"/>
+               <path d="M 50,10 L 82,29 L 87,91 L 13,91 L 18,29 Z" fill="none" stroke="#{border_color}" stroke-width="2"/>)
            elsif notch
-             %(<path d="M 50,4 L 88,26 L 93,96 L 76,96 L 76,88 L 24,88 L 24,96 L 7,96 L 12,26 Z" fill="none" stroke="#{color}" stroke-width="4" stroke-linejoin="round"/>)
+             %(<path d="M 50,4 L 88,26 L 93,96 L 76,96 L 76,88 L 24,88 L 24,96 L 7,96 L 12,26 Z" fill="none" stroke="#{border_color}" stroke-width="4" stroke-linejoin="round"/>)
            else
-             %(<path d="#{PENTAGON}" fill="none" stroke="#{color}" stroke-width="4" stroke-linejoin="round"/>)
+             %(<path d="#{PENTAGON}" fill="none" stroke="#{border_color}" stroke-width="4" stroke-linejoin="round"/>)
            end
 
   style_attr = main_style ? %( font-style="#{main_style}") : ""
 
   badge_markup = if badge
-                   %(<text x="#{badge_x}" y="#{badge_y}" font-size="#{badge_size}" font-family="#{badge_font}" font-weight="800" fill="#{color}" text-anchor="middle" dominant-baseline="central">#{badge}</text>)
+                   %(<text x="#{badge_x}" y="#{badge_y}" font-size="#{badge_size}" font-family="#{badge_font}" font-weight="800" fill="#{text_color}" text-anchor="middle" dominant-baseline="central">#{badge}</text>)
                  else
                    ""
                  end
-  divider_markup = divider ? %(<line x1="32" y1="31" x2="68" y2="31" stroke="#{color}" stroke-width="2"/>) : ""
+  divider_markup = divider ? %(<line x1="32" y1="31" x2="68" y2="31" stroke="#{text_color}" stroke-width="2"/>) : ""
 
   <<~SVG
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -86,7 +85,7 @@ def variant_svg(main:, badge: nil, badge_font: MINCHO, badge_size: 15, badge_x: 
         #{border}
         #{badge_markup}
         #{divider_markup}
-        <text x="50" y="#{main_y}" font-size="#{main_size}" font-family="#{main_font}" font-weight="700" fill="#{color}" text-anchor="middle" dominant-baseline="central"#{style_attr}>#{main}</text>
+        <text x="50" y="#{main_y}" font-size="#{main_size}" font-family="#{main_font}" font-weight="700" fill="#{text_color}" text-anchor="middle" dominant-baseline="central"#{style_attr}>#{main}</text>
       </g>
     </svg>
   SVG
@@ -100,7 +99,7 @@ VARIANTS = [
   { id: "E", title: "二重枠線(バッジなし)", desc: "文字はそのまま、外枠を二重線に", svg: variant_svg(main: "香", double_border: true) },
   { id: "F", title: "角を切り欠く(バッジなし)", desc: "五角形の下角を落として差別化", svg: variant_svg(main: "香", notch: true) },
   { id: "G", title: "傍点のみ", desc: "「成」の代わりに点ひとつ", svg: variant_svg(main: "香", badge: "・", badge_size: 26, badge_y: 18) },
-  { id: "H", title: "色分け(レンダラー案)", desc: "バッジなし、色だけ変える(フォントとは別レイヤー)", svg: variant_svg(main: "香", tint: "#b0402c") },
+  { id: "H", title: "色分け(レンダラー案)", desc: "バッジなし、枠は黒のまま文字だけ色を変える(フォントとは別レイヤー)", svg: variant_svg(main: "香", tint: "#b0402c") },
   { id: "I", title: "斜体(バッジなし)", desc: "成り駒だけ字を傾ける", svg: variant_svg(main: "香", main_style: "italic") },
   { id: "J", title: "草書体バッジ", desc: "「成」だけ毛筆(Yuji Boku)に、地の文字は明朝のまま", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO, badge_size: 19, badge_y: 20) },
   { id: "K", title: "草書体(駒全体)", desc: "「成」も地の文字も毛筆に。実物の駒に近い雰囲気", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO, badge_size: 19, badge_y: 20, main_font: SOSHO) },
@@ -108,7 +107,7 @@ VARIANTS = [
   { id: "M", title: "細字の草書(駒全体)", desc: "Yuji Syuku。繊細・行書寄りの崩し", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_LIGHT, badge_size: 19, badge_y: 20, main_font: SOSHO_LIGHT) },
   { id: "N", title: "流れる草書(駒全体)", desc: "Yuji Mai。舞うような、より大きく崩れた字形", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_FLOW, badge_size: 19, badge_y: 20, main_font: SOSHO_FLOW) },
   { id: "O", title: "流れる草書(バッジなし)", desc: "Yuji Mai を地の文字だけに使う", svg: variant_svg(main: "香", main_font: SOSHO_FLOW) },
-  { id: "P", title: "M案 + 赤字", desc: "Yuji Syuku(駒全体)を赤色に。輪郭も文字も同じインクなので両方赤くなる想定", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_LIGHT, badge_size: 19, badge_y: 20, main_font: SOSHO_LIGHT, tint: "#c0392b") },
+  { id: "P", title: "M案 + 赤字", desc: "Yuji Syuku、枠は黒のまま「成」と地の文字だけ赤色に", svg: variant_svg(main: "香", badge: "成", badge_font: SOSHO_LIGHT, badge_size: 19, badge_y: 20, main_font: SOSHO_LIGHT, tint: "#c0392b") },
 ].freeze
 
 def variant_card(v)
