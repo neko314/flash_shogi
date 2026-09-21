@@ -57,7 +57,10 @@ def variant_svg(main:, badge: nil, badge_font: MINCHO, badge_size: 15, badge_x: 
                 double_border: false, tint: nil, divider: false, notch: false)
   # tint はターミナル側のANSI色指定を模したもの: 実際のフォントでは駒の輪郭も
   # 文字も同じグリフの一部(単色インク)なので、色を変えるなら両方変わる。
-  color = tint || "#000"
+  # tint が無い場合は currentColor にして、CSS側(.variant-glyph { color })で
+  # ライト/ダークテーマに追従できるようにする。tint 指定時はそれを上書きしない
+  # よう、CSS側は .variant-glyph に fill/stroke の強制ルールを持たせない。
+  color = tint || "currentColor"
 
   border = if double_border
              %(<path d="#{PENTAGON}" fill="none" stroke="#{color}" stroke-width="3"/>
@@ -113,7 +116,7 @@ def variant_card(v)
   cells = sizes.map do |px|
     <<~HTML
       <div class="size-cell">
-        <div class="size-glyph" style="width:#{px}px;height:#{px}px">#{v[:svg]}</div>
+        <div class="variant-glyph" style="width:#{px}px;height:#{px}px">#{v[:svg]}</div>
         <span>#{px}px</span>
       </div>
     HTML
@@ -327,6 +330,11 @@ html = <<~HTML
     .size-glyph svg { width: 100%; height: 100%; display: block; }
     .size-glyph svg path { stroke: var(--ink); }
     .size-glyph svg text { fill: var(--ink); }
+    /* variant-glyph は色分け案(tint)を試す場所なので、.size-glyph と違って
+       fill/stroke を強制しない。tint 無しの案は currentColor で下の color
+       プロパティに追従し、tint 有りの案(H, P)はSVG側の指定色がそのまま出る。 */
+    .variant-glyph { color: var(--ink); }
+    .variant-glyph svg { width: 100%; height: 100%; display: block; }
     .size-cell span {
       font-size: 10px;
       color: var(--ink-soft);
