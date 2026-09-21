@@ -41,7 +41,7 @@ def stage1():
     font.fontname = "FlashShogiPua"
     font.familyname = "Flash Shogi PUA"
     font.fullname = "Flash Shogi PUA"
-    font.version = "0.2"
+    font.version = "1.0"
     font.copyright = "flash_shogi project (private, unpublished)"
     font.encoding = "UnicodeFull"
 

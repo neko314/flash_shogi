@@ -27,7 +27,7 @@ from fontTools.pens.transformPen import TransformPen
 FONT_PATH = "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc"
 FONT_NUMBER = 0  # Hiragino Sans / Kaku Gothic ProN W6 (太め)
 
-CHARS = list("歩香桂銀金角飛玉と馬龍成")
+CHARS = list("歩香桂銀金角飛玉と馬龍成全圭杏")
 
 OUT_PATH = os.path.join(os.path.dirname(__file__), "glyph_paths.json")
 

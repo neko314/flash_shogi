@@ -20,9 +20,8 @@ GLYPH_PATHS_FILE = File.join(__dir__, "glyph_paths.json")
 GLYPH_PATHS = JSON.parse(File.read(GLYPH_PATHS_FILE)) if File.exist?(GLYPH_PATHS_FILE)
 
 # 4-6-2: 駒種インデックス順
-# 成香・成桂・成銀は「小さい"成" + 大きい地の文字」のバッジ方式にする。
-# 二文字を均等な大きさで積むと、実際のフォントサイズで表示したときに
-# 判別の決め手になる地の文字(香/桂/銀)が小さくなりすぎて読み取りにくいため。
+# 成香・成桂・成銀は一文字の略字(杏・圭・全)で表記する(将棋の手書き略記で
+# 使われる慣用表記)。二文字表記だと小さいサイズで判別しづらいための対応。
 # と・成香・成桂・成銀・馬・龍(成駒全般)は文字色を赤にして、駒の地色・枠は
 # 変えずに「成っている」ことを一目で分かるようにする。
 PIECES = [
@@ -35,9 +34,9 @@ PIECES = [
   { key: "hisha",    label: "飛",                         promoted: false },
   { key: "gyoku",    label: "玉",                         promoted: false },
   { key: "to",       label: "と",                         promoted: true },
-  { key: "narikyo",  label: { badge: "成", main: "香" }, promoted: true },
-  { key: "narikei",  label: { badge: "成", main: "桂" }, promoted: true },
-  { key: "narigin",  label: { badge: "成", main: "銀" }, promoted: true },
+  { key: "narikyo",  label: "杏",                         promoted: true },
+  { key: "narikei",  label: "圭",                         promoted: true },
+  { key: "narigin",  label: "全",                         promoted: true },
   { key: "uma",      label: "馬",                         promoted: true },
   { key: "ryu",      label: "龍",                         promoted: true },
 ].freeze

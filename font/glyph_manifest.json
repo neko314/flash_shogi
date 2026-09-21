@@ -351,7 +351,7 @@
     {
       "name": "sente-narikyo",
       "codepoint": 57353,
-      "label": "成香",
+      "label": "杏",
       "layers": [
         {
           "glyph": "sente-narikyo.body",
@@ -370,7 +370,7 @@
     {
       "name": "gote-narikyo",
       "codepoint": 57609,
-      "label": "成香",
+      "label": "杏",
       "layers": [
         {
           "glyph": "gote-narikyo.body",
@@ -389,7 +389,7 @@
     {
       "name": "sente-narikei",
       "codepoint": 57354,
-      "label": "成桂",
+      "label": "圭",
       "layers": [
         {
           "glyph": "sente-narikei.body",
@@ -408,7 +408,7 @@
     {
       "name": "gote-narikei",
       "codepoint": 57610,
-      "label": "成桂",
+      "label": "圭",
       "layers": [
         {
           "glyph": "gote-narikei.body",
@@ -427,7 +427,7 @@
     {
       "name": "sente-narigin",
       "codepoint": 57355,
-      "label": "成銀",
+      "label": "全",
       "layers": [
         {
           "glyph": "sente-narigin.body",
@@ -446,7 +446,7 @@
     {
       "name": "gote-narigin",
       "codepoint": 57611,
-      "label": "成銀",
+      "label": "全",
       "layers": [
         {
           "glyph": "gote-narigin.body",
