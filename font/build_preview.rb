@@ -43,6 +43,85 @@ end
 sente_cells = ORDER.map { |k| card(k, "sente") }.join
 gote_cells = ORDER.map { |k| card(k, "gote") }.join
 
+# --- イラスト調(いらすとや参考、色付き・丸み)試作 ---------------------------
+# 五角形の角を丸めたパスを作る(各頂点を半径 radius だけ手前で切り、
+# 頂点そのものを制御点にした二次ベジェで結ぶ)。
+
+def rounded_polygon_path(points, radius)
+  n = points.size
+  before = []
+  after = []
+  points.each_with_index do |(x, y), i|
+    px, py = points[(i - 1) % n]
+    nx, ny = points[(i + 1) % n]
+
+    d1 = Math.sqrt((x - px)**2 + (y - py)**2)
+    before << [x + (px - x) / d1 * radius, y + (py - y) / d1 * radius]
+
+    d2 = Math.sqrt((nx - x)**2 + (ny - y)**2)
+    after << [x + (nx - x) / d2 * radius, y + (ny - y) / d2 * radius]
+  end
+
+  path = +"M #{after[0][0].round(1)},#{after[0][1].round(1)} "
+  n.times do |i|
+    j = (i + 1) % n
+    path << "L #{before[j][0].round(1)},#{before[j][1].round(1)} "
+    path << "Q #{points[j][0]},#{points[j][1]} #{after[j][0].round(1)},#{after[j][1].round(1)} "
+  end
+  path << "Z"
+  path
+end
+
+PENTAGON_POINTS = [[50, 4], [88, 26], [93, 96], [7, 96], [12, 26]].freeze
+ROUNDED_PENTAGON = rounded_polygon_path(PENTAGON_POINTS, 14)
+MARU_GOTHIC = "'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', sans-serif"
+
+def illust_svg(main:, badge: nil, fill: "#f5e2b8", stroke: "#b9824a", ink: "#4a3016")
+  badge_markup = badge ? %(<text x="50" y="21" font-size="19" font-family="#{MARU_GOTHIC}" font-weight="900" fill="#{ink}" text-anchor="middle" dominant-baseline="central">#{badge}</text>) : ""
+  <<~SVG
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <g>
+        <path d="#{ROUNDED_PENTAGON}" fill="#{fill}" stroke="#{stroke}" stroke-width="5" stroke-linejoin="round"/>
+        #{badge_markup}
+        <text x="50" y="57" font-size="46" font-family="#{MARU_GOTHIC}" font-weight="900" fill="#{ink}" text-anchor="middle" dominant-baseline="central">#{main}</text>
+      </g>
+    </svg>
+  SVG
+end
+
+ILLUST_VARIANTS = [
+  { id: "Q1", title: "基本形(歩)", desc: "クリーム地+丸ゴシック", svg: illust_svg(main: "歩") },
+  { id: "Q2", title: "玉", desc: "同じ配色で玉将", svg: illust_svg(main: "玉") },
+  { id: "Q3", title: "飛", desc: "同じ配色で飛車", svg: illust_svg(main: "飛") },
+  { id: "Q4", title: "成香(バッジ方式と併用)", desc: "小さい成+地の文字、丸ゴシック", svg: illust_svg(main: "香", badge: "成") },
+  { id: "Q5", title: "配色違い(白木)", desc: "より白っぽい木地", svg: illust_svg(main: "歩", fill: "#f8efd8", stroke: "#c9a877", ink: "#5c4526") },
+  { id: "Q6", title: "配色違い(濃いめ)", desc: "コントラスト強め", svg: illust_svg(main: "歩", fill: "#eccf8f", stroke: "#8a5a28", ink: "#3a230f") },
+].freeze
+
+def illust_card(v)
+  sizes = [72, 40, 28, 20]
+  cells = sizes.map do |px|
+    <<~HTML
+      <div class="size-cell">
+        <div class="variant-glyph" style="width:#{px}px;height:#{px}px">#{v[:svg]}</div>
+        <span>#{px}px</span>
+      </div>
+    HTML
+  end.join
+  <<~HTML
+    <div class="variant-row">
+      <div class="variant-label">
+        <span class="variant-id">#{v[:id]}</span>
+        <span class="variant-title">#{v[:title]}</span>
+        <span class="variant-desc">#{v[:desc]}</span>
+      </div>
+      <div class="size-cells">#{cells}</div>
+    </div>
+  HTML
+end
+
+illust_rows = ILLUST_VARIANTS.map { |v| illust_card(v) }.join
+
 # --- 成駒バッジの改善案比較 -------------------------------------------------
 
 MINCHO = "'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif"
@@ -158,7 +237,7 @@ size_check_rows = %w[narikyo narikei narigin].map { |k| size_check_row(k) }.join
 html = <<~HTML
   <title>駒グリフ台帳</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=Yuji+Boku&family=Yuji+Syuku&family=Yuji+Mai&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=Yuji+Boku&family=Yuji+Syuku&family=Yuji+Mai&family=Zen+Maru+Gothic:wght@700;900&display=swap');
 
     :root {
       --paper: #f3ede0;
@@ -396,6 +475,16 @@ html = <<~HTML
         ここから SVG を手描きデザインに差し替えて、同じファイル名で font/svg/ を上書きすれば見た目が更新されます。
       </p>
     </header>
+
+    <section>
+      <div class="section-head">
+        <h2>イラスト調(色付き・丸み)試作</h2>
+        <span>いらすとやの将棋駒イラストの雰囲気を参考に</span>
+      </div>
+      <div class="variant-list">
+        #{illust_rows}
+      </div>
+    </section>
 
     <section>
       <div class="section-head">
