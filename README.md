@@ -55,7 +55,12 @@ ruby bin/flash_shogi --theme=pua    # PUA(私用領域)の自作グリフフォ�
    - 「Ambiguous characters are double-width」を有効にする。駒グリフは
      Unicode の East Asian Width が未定義(Ambiguous)で、この設定が無いと
      半角(1カラム)扱いになり盤面がズレる
-3. `ruby bin/flash_shogi --theme=pua` を実行して確認する
+3. **iTerm2の Preferences → General → Magic で Metal(GPU)レンダラを無効化する。**
+   iTerm2のMetalレンダラはCOLR/CPALカラーフォントを正しく描画できないバグが
+   あり、有効なままだと駒が色なし・崩れた小さい塊として表示される。
+   Metalを無効化(レガシーレンダラを使用)すると正しく色付きで表示される
+   (実機で確認済み)。
+4. `ruby bin/flash_shogi --theme=pua` を実行して確認する
 
 Terminal.appには上記の「非ASCIIだけ別フォント」「Ambiguous Width」設定が
 無く、駒グリフが常に半角扱いになってしまう。Terminal.appを使う場合は

@@ -129,6 +129,25 @@ GUIアプリは別、CLIのみで足りる)。
 - 恒久的には `sudo pkill -9 fontd` でフォントデーモンを再起動させる方法もある
   (要sudo、ユーザー自身の実行推奨)
 
+### iTerm2で駒が色なし・崩れた小さい塊で表示される場合(重要)
+
+**原因: iTerm2のMetal(GPU)レンダラはCOLR/CPALカラーフォントを正しく描画
+できないバグがある。** フォント自体やビルドパイプラインが壊れているのでは
+なく、iTerm2のGPU描画パス固有の問題。
+
+切り分け方法:
+
+1. Font Book、または `@font-face` を使ったブラウザ上のテストページで
+   同じ `.ttf` を確認する → 正しく色付き表示されればフォント自体は正常
+2. それでもiTerm2だけ崩れるなら、COLR/CPALテーブルを含まない単色版
+   (`font/build/FlashShogiPua.stage1.ttf`、FontForgeの`stage1`出力そのもの)
+   を試す → 単色(輪郭のみ、色はターミナルの文字色に依存)なら正しく表示
+   される場合、COLRテーブルの有無が原因と確定できる
+
+**解決策**: iTerm2の Preferences → General → Magic で Metalレンダラを
+無効化する。無効化後は色付きで正しく表示される(実機で確認済み)。
+Metal有効時は代わりに単色版フォントを使う、という回避策もある。
+
 ## 普段使っているフォントと合体させる(Terminal.app向け)
 
 Terminal.appは1プロファイルにつき1フォントしか選べない。`Flash Shogi PUA`
@@ -254,11 +273,11 @@ cp font/build/FiraCodeShogi.ttf ~/Library/Fonts/
 ## 次の工程(未着手)
 
 1. Ghostty / kitty でも「Ambiguous Width」相当の設定と表示を確認する
-   (iTerm2・Terminal.appは確認済み。iTerm2が現状の最有力)
-2. デザインが最終確定したら、開発用の `FlashShogiPuaDevN` ではなく正式名で
-   ビルドし直す
-3. 気になる駒(特に画数の多い龍・馬など)があれば個別に調整する
-4. 配布(公開)する場合、`merge_glyphs.py` の使い方と対応表・iTerm2の
+   (iTerm2・Terminal.appは確認済み。iTerm2が現状の最有力。ただし
+   iTerm2はMetalレンダラを無効化する必要がある。上記「macOSでの表示確認・
+   キャッシュ対策」参照)
+2. 気になる駒(特に画数の多い龍・馬など)があれば個別に調整する
+3. 配布(公開)する場合、`merge_glyphs.py` の使い方と対応表・iTerm2の
    Ambiguous Width設定を独立したユーザー向け手順としてまとめる
 
 推奨ターミナル優先順位: Ghostty > kitty > iTerm2 > Terminal.app(補助的)。
