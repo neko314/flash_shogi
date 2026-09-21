@@ -12,8 +12,12 @@
 # 命名・コードポイント対応は引き継ぎ仕様書 4-6 節に準拠する。
 
 require "fileutils"
+require "json"
 
 OUT_DIR = File.join(__dir__, "svg")
+LAYER_DIR = File.join(__dir__, "svg_layers")
+GLYPH_PATHS_FILE = File.join(__dir__, "glyph_paths.json")
+GLYPH_PATHS = JSON.parse(File.read(GLYPH_PATHS_FILE)) if File.exist?(GLYPH_PATHS_FILE)
 
 # 4-6-2: 駒種インデックス順
 # 成香・成桂・成銀は「小さい"成" + 大きい地の文字」のバッジ方式にする。
@@ -42,8 +46,6 @@ PIECES.freeze
 
 SENTE_BASE = 0xE000
 GOTE_BASE = 0xE100
-
-FONT_STACK = "'Hiragino Mincho ProN', 'Hiragino Sans', 'Yu Mincho', serif"
 
 FILL = "#f5e2b8"    # クリーム地
 STROKE = "#b9824a"  # 木の縁
@@ -82,27 +84,40 @@ def rounded_polygon_path(points, radius)
 end
 
 PENTAGON_PATH = rounded_polygon_path(PENTAGON_POINTS, ROUND_RADIUS)
+# 後手は実行時の <g transform="rotate(180 50 50)"> に頼らず、180°回転後の
+# 座標をあらかじめ計算しておく(下記の理由により)。
+PENTAGON_PATH_GOTE = rounded_polygon_path(PENTAGON_POINTS.map { |x, y| [100 - x, 100 - y] }, ROUND_RADIUS)
 
-# 五角形の視覚的な重心はバウンディングボックス中央(y=50)より下にある。
-# text-anchor="middle" + dominant-baseline="central" で、指定した y を
-# 文字そのものの中心として扱わせ、その y を重心に合わせている。
-GLYPH_CENTER_Y = 57
-BADGE_Y = 21
-BADGE_SIZE = 15
-MAIN_SIZE = 46
+# 文字は <text> ではなく、extract_glyphs.py がヒラギノ明朝 ProN W6 から
+# 抽出済みの輪郭パス(font/glyph_paths.json)を使う。FontForge の SVG 取り込みは
+# <text> を文字として認識しないため、あらかじめパス化しておく必要がある。
+# 位置(main=中央寄り重心、badge=五角形の肩)は extract_glyphs.py 側の
+# MAIN_Y/BADGE_Y と対応している。
+#
+# 後手側は <g transform="rotate(180 50 50)"> を使わず、extract_glyphs.py で
+# あらかじめ180°回転させた座標(main_gote/badge_gote)を使う。FontForge の
+# SVG取り込みがトランスフォーム適用前のバウンディングボックスを基準に
+# auto-scale してしまい、回転後の座標が大きくずれる不具合を確認したため。
 
-def text_node(char, y:, size:, color:)
-  %(<text x="50" y="#{y}" font-size="#{size}" font-family="#{FONT_STACK}" font-weight="700" fill="#{color}" text-anchor="middle" dominant-baseline="central">#{char}</text>)
+# CHAR_BOLD_STROKE: 文字の輪郭に同色のstrokeを足して疑似ボールド化する太さ。
+# fill と stroke が同じ色(同じCOLRレイヤー)なので重なっても問題にならない。
+CHAR_BOLD_STROKE = 1.6
+
+def path_node(char, slot, color)
+  raise "no extracted path for #{char.inspect}(#{slot}). run: font/.venv/bin/python3 font/extract_glyphs.py" unless GLYPH_PATHS&.dig(char, slot)
+
+  %(<path d="#{GLYPH_PATHS[char][slot]}" fill="#{color}" stroke="#{color}" stroke-width="#{CHAR_BOLD_STROKE}" stroke-linejoin="round"/>)
 end
 
-def text_markup(label, color:)
+def text_markup(label, color:, rotate:)
+  suffix = rotate ? "_gote" : ""
   if label.is_a?(Hash)
     [
-      text_node(label.fetch(:badge), y: BADGE_Y, size: BADGE_SIZE, color: color),
-      text_node(label.fetch(:main), y: GLYPH_CENTER_Y, size: MAIN_SIZE, color: color),
+      path_node(label.fetch(:badge), "badge#{suffix}", color),
+      path_node(label.fetch(:main), "main#{suffix}", color),
     ].join("\n")
   else
-    text_node(label, y: GLYPH_CENTER_Y, size: MAIN_SIZE, color: color)
+    path_node(label, "main#{suffix}", color)
   end
 end
 
@@ -111,19 +126,67 @@ def plain_label(label)
 end
 
 def svg_document(label, promoted:, rotate:)
-  transform = rotate ? %( transform="rotate(180 50 50)") : ""
   color = promoted ? PROMOTED_INK : INK
+  pentagon = rotate ? PENTAGON_PATH_GOTE : PENTAGON_PATH
+  # FontForge の SVG 取り込みは、塗り(fill)同士が重なると重なった部分の
+  # 巻き方向次第で文字が駒の塗りに埋もれて消えてしまう(要検証で確認済み)。
+  # 一方 stroke(線)は取り込み時に中空のリング形状として正しく変換される。
+  # そこで五角形は「線のみ・塗りなし」にし、文字(塗りのみ)と重ならせない
+  # ことで、単色フォントでも両方がちゃんと見えるようにしている。
+  # クリーム地(#{FILL})や赤字は、実フォントに反映するには別途 COLR/CPAL
+  # カラーフォント化が必要(font/README.md 参照)。色の値自体はSVGソースに
+  # 残しておき、その際の参照用にする。
   <<~SVG
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <g#{transform}>
-        <path d="#{PENTAGON_PATH}" fill="#{FILL}" stroke="#{STROKE}" stroke-width="3" stroke-linejoin="round"/>
-        #{text_markup(label, color: color).strip}
+      <g>
+        <path d="#{pentagon}" fill="none" stroke="#{STROKE}" stroke-width="3" stroke-linejoin="round"/>
+        #{text_markup(label, color: color, rotate: rotate).strip}
+      </g>
+    </svg>
+  SVG
+end
+
+# --- COLR/CPAL用のレイヤー別SVG -------------------------------------------
+# COLRはレイヤー(=別グリフ)ごとに1色を割り当てて重ね描きする方式なので、
+# 「塗りの地色」「線の縁取り」「文字」を独立した3枚のSVG(=3グリフ)として
+# 書き出す。この方式なら重なり(fillの巻き方向)を気にする必要がない。
+PALETTE = {
+  body: FILL,
+  border: STROKE,
+  ink: INK,
+  promoted_ink: PROMOTED_INK,
+}.freeze
+
+def body_svg(rotate:)
+  pentagon = rotate ? PENTAGON_PATH_GOTE : PENTAGON_PATH
+  <<~SVG
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <path d="#{pentagon}" fill="#000"/>
+    </svg>
+  SVG
+end
+
+def border_svg(rotate:)
+  pentagon = rotate ? PENTAGON_PATH_GOTE : PENTAGON_PATH
+  <<~SVG
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <path d="#{pentagon}" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+  SVG
+end
+
+def char_svg(label, rotate:)
+  <<~SVG
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <g>
+        #{text_markup(label, color: "#000", rotate: rotate).strip}
       </g>
     </svg>
   SVG
 end
 
 FileUtils.mkdir_p(OUT_DIR)
+FileUtils.mkdir_p(LAYER_DIR)
 
 manifest = []
 
@@ -133,15 +196,41 @@ PIECES.each do |piece|
 
   sente_name = "sente-#{piece[:key]}"
   gote_name = "gote-#{piece[:key]}"
+  ink_role = piece[:promoted] ? :promoted_ink : :ink
 
-  File.write(File.join(OUT_DIR, "#{sente_name}.svg"), svg_document(piece[:label], promoted: piece[:promoted], rotate: false))
-  File.write(File.join(OUT_DIR, "#{gote_name}.svg"), svg_document(piece[:label], promoted: piece[:promoted], rotate: true))
+  [[sente_name, false], [gote_name, true]].each do |name, rotate|
+    # 単色版(フォールバック用の輪郭 + プレビュー用)
+    File.write(File.join(OUT_DIR, "#{name}.svg"), svg_document(piece[:label], promoted: piece[:promoted], rotate: rotate))
 
-  manifest << { name: sente_name, codepoint: sente_cp, label: plain_label(piece[:label]) }
-  manifest << { name: gote_name, codepoint: gote_cp, label: plain_label(piece[:label]) }
+    # COLR用レイヤー3枚
+    File.write(File.join(LAYER_DIR, "#{name}.body.svg"), body_svg(rotate: rotate))
+    File.write(File.join(LAYER_DIR, "#{name}.border.svg"), border_svg(rotate: rotate))
+    File.write(File.join(LAYER_DIR, "#{name}.char.svg"), char_svg(piece[:label], rotate: rotate))
+  end
+
+  manifest << {
+    name: sente_name, codepoint: sente_cp, label: plain_label(piece[:label]),
+    layers: [
+      { glyph: "#{sente_name}.body", color: :body },
+      { glyph: "#{sente_name}.border", color: :border },
+      { glyph: "#{sente_name}.char", color: ink_role },
+    ],
+  }
+  manifest << {
+    name: gote_name, codepoint: gote_cp, label: plain_label(piece[:label]),
+    layers: [
+      { glyph: "#{gote_name}.body", color: :body },
+      { glyph: "#{gote_name}.border", color: :border },
+      { glyph: "#{gote_name}.char", color: ink_role },
+    ],
+  }
 end
 
-puts "generated #{manifest.size} svg files into #{OUT_DIR}"
+manifest_path = File.join(__dir__, "glyph_manifest.json")
+File.write(manifest_path, JSON.pretty_generate({ palette: PALETTE, glyphs: manifest }))
+
+puts "generated #{manifest.size} glyphs (single-color + 3-layer) "
+puts "wrote manifest to #{manifest_path}"
 manifest.each do |m|
   puts format("  U+%04X  %-14s %s", m[:codepoint], m[:name], m[:label])
 end

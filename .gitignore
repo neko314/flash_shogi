@@ -2,3 +2,8 @@
 .bundle/
 vendor/bundle/
 .DS_Store
+
+# font/ ビルド周り
+font/.venv/
+font/build/*.stage1.ttf
+font/build/*Dev*.ttf

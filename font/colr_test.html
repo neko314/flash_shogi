@@ -1,0 +1,37 @@
+<title>PUA COLRテスト</title>
+<!--
+  font/build/FlashShogiPua.ttf のCOLR/CPAL(色付きレイヤー)が実際に
+  ブラウザで色付きレンダリングされるか確認するための開発用ページ。
+  Artifact.publish で files に font/build/FlashShogiPua.ttf を添えて公開する。
+-->
+<style>
+  @font-face {
+    font-family: "FlashShogiPua";
+    src: url("FlashShogiPua.ttf") format("truetype");
+  }
+  :root { color-scheme: light dark; }
+  body {
+    background: #2b2b2b;
+    color: #eee;
+    font-family: sans-serif;
+    padding: 24px;
+  }
+  .glyph {
+    font-family: "FlashShogiPua", sans-serif;
+    font-size: 100px;
+    line-height: 1.4;
+    display: inline-block;
+    margin: 8px 16px;
+    background: #444;
+    padding: 8px;
+  }
+  .row { margin-bottom: 12px; }
+</style>
+<body>
+  <div class="row">
+    先手: <span class="glyph">&#xE000;</span><span class="glyph">&#xE007;</span><span class="glyph">&#xE009;</span><span class="glyph">&#xE00D;</span>
+  </div>
+  <div class="row">
+    後手: <span class="glyph">&#xE100;</span><span class="glyph">&#xE107;</span><span class="glyph">&#xE109;</span><span class="glyph">&#xE10D;</span>
+  </div>
+</body>

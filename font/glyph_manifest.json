@@ -1,0 +1,542 @@
+{
+  "palette": {
+    "body": "#f5e2b8",
+    "border": "#b9824a",
+    "ink": "#4a3016",
+    "promoted_ink": "#c0392b"
+  },
+  "glyphs": [
+    {
+      "name": "sente-fu",
+      "codepoint": 57344,
+      "label": "歩",
+      "layers": [
+        {
+          "glyph": "sente-fu.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-fu.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-fu.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-fu",
+      "codepoint": 57600,
+      "label": "歩",
+      "layers": [
+        {
+          "glyph": "gote-fu.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-fu.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-fu.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-kyo",
+      "codepoint": 57345,
+      "label": "香",
+      "layers": [
+        {
+          "glyph": "sente-kyo.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-kyo.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-kyo.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-kyo",
+      "codepoint": 57601,
+      "label": "香",
+      "layers": [
+        {
+          "glyph": "gote-kyo.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-kyo.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-kyo.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-kei",
+      "codepoint": 57346,
+      "label": "桂",
+      "layers": [
+        {
+          "glyph": "sente-kei.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-kei.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-kei.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-kei",
+      "codepoint": 57602,
+      "label": "桂",
+      "layers": [
+        {
+          "glyph": "gote-kei.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-kei.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-kei.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-gin",
+      "codepoint": 57347,
+      "label": "銀",
+      "layers": [
+        {
+          "glyph": "sente-gin.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-gin.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-gin.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-gin",
+      "codepoint": 57603,
+      "label": "銀",
+      "layers": [
+        {
+          "glyph": "gote-gin.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-gin.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-gin.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-kin",
+      "codepoint": 57348,
+      "label": "金",
+      "layers": [
+        {
+          "glyph": "sente-kin.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-kin.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-kin.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-kin",
+      "codepoint": 57604,
+      "label": "金",
+      "layers": [
+        {
+          "glyph": "gote-kin.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-kin.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-kin.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-kaku",
+      "codepoint": 57349,
+      "label": "角",
+      "layers": [
+        {
+          "glyph": "sente-kaku.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-kaku.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-kaku.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-kaku",
+      "codepoint": 57605,
+      "label": "角",
+      "layers": [
+        {
+          "glyph": "gote-kaku.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-kaku.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-kaku.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-hisha",
+      "codepoint": 57350,
+      "label": "飛",
+      "layers": [
+        {
+          "glyph": "sente-hisha.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-hisha.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-hisha.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-hisha",
+      "codepoint": 57606,
+      "label": "飛",
+      "layers": [
+        {
+          "glyph": "gote-hisha.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-hisha.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-hisha.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-gyoku",
+      "codepoint": 57351,
+      "label": "玉",
+      "layers": [
+        {
+          "glyph": "sente-gyoku.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-gyoku.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-gyoku.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-gyoku",
+      "codepoint": 57607,
+      "label": "玉",
+      "layers": [
+        {
+          "glyph": "gote-gyoku.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-gyoku.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-gyoku.char",
+          "color": "ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-to",
+      "codepoint": 57352,
+      "label": "と",
+      "layers": [
+        {
+          "glyph": "sente-to.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-to.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-to.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-to",
+      "codepoint": 57608,
+      "label": "と",
+      "layers": [
+        {
+          "glyph": "gote-to.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-to.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-to.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-narikyo",
+      "codepoint": 57353,
+      "label": "成香",
+      "layers": [
+        {
+          "glyph": "sente-narikyo.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-narikyo.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-narikyo.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-narikyo",
+      "codepoint": 57609,
+      "label": "成香",
+      "layers": [
+        {
+          "glyph": "gote-narikyo.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-narikyo.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-narikyo.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-narikei",
+      "codepoint": 57354,
+      "label": "成桂",
+      "layers": [
+        {
+          "glyph": "sente-narikei.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-narikei.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-narikei.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-narikei",
+      "codepoint": 57610,
+      "label": "成桂",
+      "layers": [
+        {
+          "glyph": "gote-narikei.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-narikei.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-narikei.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-narigin",
+      "codepoint": 57355,
+      "label": "成銀",
+      "layers": [
+        {
+          "glyph": "sente-narigin.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-narigin.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-narigin.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-narigin",
+      "codepoint": 57611,
+      "label": "成銀",
+      "layers": [
+        {
+          "glyph": "gote-narigin.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-narigin.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-narigin.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-uma",
+      "codepoint": 57356,
+      "label": "馬",
+      "layers": [
+        {
+          "glyph": "sente-uma.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-uma.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-uma.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-uma",
+      "codepoint": 57612,
+      "label": "馬",
+      "layers": [
+        {
+          "glyph": "gote-uma.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-uma.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-uma.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "sente-ryu",
+      "codepoint": 57357,
+      "label": "龍",
+      "layers": [
+        {
+          "glyph": "sente-ryu.body",
+          "color": "body"
+        },
+        {
+          "glyph": "sente-ryu.border",
+          "color": "border"
+        },
+        {
+          "glyph": "sente-ryu.char",
+          "color": "promoted_ink"
+        }
+      ]
+    },
+    {
+      "name": "gote-ryu",
+      "codepoint": 57613,
+      "label": "龍",
+      "layers": [
+        {
+          "glyph": "gote-ryu.body",
+          "color": "body"
+        },
+        {
+          "glyph": "gote-ryu.border",
+          "color": "border"
+        },
+        {
+          "glyph": "gote-ryu.char",
+          "color": "promoted_ink"
+        }
+      ]
+    }
+  ]
+}
