@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../lib/cli"
+
+def parse_theme(argv)
+  theme_arg = argv.find { |a| a.start_with?("--theme=") }
+  return :text unless theme_arg
+
+  value = theme_arg.split("=", 2).last
+  unless %w[text pua].include?(value)
+    warn "不明なテーマです: #{value}（text または pua を指定してください）"
+    exit 1
+  end
+  value.to_sym
+end
+
+if ARGV.include?("--help") || ARGV.include?("-h")
+  puts <<~USAGE
+    使い方: flash_shogi [--theme=text|pua]
+
+      --theme=text  通常の漢字駒で表示します（デフォルト）
+      --theme=pua   PUA(私用領域)に割り当てた自作グリフフォントで表示します
+                    ※ 対応フォントを導入したターミナルでのみ正しく表示されます
+  USAGE
+  exit 0
+end
+
+CLI.new(theme: parse_theme(ARGV)).run
