@@ -55,7 +55,7 @@ PROMOTED_INK = "#c0392b" # 成駒の文字色(赤)
 # --- 角を丸めすぎない五角形(先手=正位置、駒尖が上)のパス。100x100基準。-----
 # 各頂点を半径 radius だけ手前で切り、頂点そのものを制御点にした二次ベジェで結ぶ。
 
-PENTAGON_POINTS = [[50, 4], [88, 26], [93, 96], [7, 96], [12, 26]].freeze
+PENTAGON_POINTS = [[50, 3], [91, 23], [97, 97], [3, 97], [9, 23]].freeze
 ROUND_RADIUS = 4
 
 def rounded_polygon_path(points, radius)
@@ -101,7 +101,7 @@ PENTAGON_PATH_GOTE = rounded_polygon_path(PENTAGON_POINTS.map { |x, y| [100 - x,
 
 # CHAR_BOLD_STROKE: 文字の輪郭に同色のstrokeを足して疑似ボールド化する太さ。
 # fill と stroke が同じ色(同じCOLRレイヤー)なので重なっても問題にならない。
-CHAR_BOLD_STROKE = 1.6
+CHAR_BOLD_STROKE = 1.4
 
 def path_node(char, slot, color)
   raise "no extracted path for #{char.inspect}(#{slot}). run: font/.venv/bin/python3 font/extract_glyphs.py" unless GLYPH_PATHS&.dig(char, slot)
