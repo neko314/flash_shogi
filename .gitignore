@@ -7,3 +7,7 @@ vendor/bundle/
 font/.venv/
 font/build/*.stage1.ttf
 font/build/*Dev*.ttf
+# merge_glyphs.py の出力(利用者ごとの個人フォントに依存するので配布物には含めない)
+font/build/*Shogi.ttf
+!font/build/FlashShogiPua.ttf
+font/build/MenloRegular.ttf

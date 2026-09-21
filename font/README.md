@@ -13,6 +13,11 @@
 - `../lib/renderer.rb` の `pua` テーマは、このコードポイント表と同じ規則
   (`SENTE_BASE=0xE000` / `GOTE_OFFSET=0x0100`) で実装済みなので、フォントさえ
   導入すればアプリ側の対応は不要
+- **普段使いのフォントに駒グリフを合体させるツール(`merge_glyphs.py`)も完成**。
+  Terminal.appは1プロファイルにつき1フォントしか設定できず、PUAフォント単体を
+  指定すると他の文字の見た目が崩れる問題があったため、Nerd Fontsと同じ要領で
+  普段使っているフォント(Fira Code, Menloで動作確認済み)に駒グリフだけを
+  追加注入する方式にした。詳細は「普段使っているフォントと合体させる」節
 
 ## デザイン仕様(確定)
 
@@ -113,6 +118,68 @@ GUIアプリは別、CLIのみで足りる)。
 - 恒久的には `sudo pkill -9 fontd` でフォントデーモンを再起動させる方法もある
   (要sudo、ユーザー自身の実行推奨)
 
+## 普段使っているフォントと合体させる
+
+Terminal.appは1プロファイルにつき1フォントしか選べない。`Flash Shogi PUA`
+単体を指定すると、駒以外の文字(アルファベット・記号など)がOS任せの代替
+フォントで表示されて見た目が崩れる。
+
+**Ghostty / kitty / iTerm2 を使っている場合はこの節は不要**。これらは
+「特定のUnicode範囲だけ別フォントを使う」設定ができる(例: kittyの
+`symbol_map`)。普段のフォント + `Flash Shogi PUA` を設定ファイルに数行
+書くだけで済み、フォントを合体させる必要はない。具体的な設定例は
+「次の工程」に追記予定。
+
+Terminal.appの場合は、Nerd Fontsと同じ要領で **普段使っているフォントに
+駒グリフだけを追加注入した1本のフォント** を作るのが確実。
+
+```bash
+font/.venv/bin/python3 font/merge_glyphs.py <普段使っているフォントのパス> [出力先]
+```
+
+例:
+
+```bash
+# Fira Code (可変フォント) の例
+font/.venv/bin/python3 font/merge_glyphs.py \
+  ~/Library/Fonts/FiraCode-VariableFont_wght.ttf \
+  font/build/FiraCodeShogi.ttf
+
+# .ttc(複数書体入りコレクション)の場合は先にfontToolsで1書体を取り出す
+font/.venv/bin/python3 -c "
+from fontTools.ttLib import TTFont
+TTFont('/System/Library/Fonts/Menlo.ttc', fontNumber=0).save('font/build/MenloRegular.ttf')
+"
+font/.venv/bin/python3 font/merge_glyphs.py font/build/MenloRegular.ttf font/build/MenloShogi.ttf
+
+cp font/build/FiraCodeShogi.ttf ~/Library/Fonts/
+```
+
+出来上がるフォントは「(元のフォント名) Shogi」という名前になり(例:
+`Fira Code Light Shogi`)、元のフォントとは別物として選べる。普段の文字は
+元のフォントと完全に同じ見た目のまま、U+E000–U+E10DだけPUAフォントの
+色付きグリフに置き換わる。
+
+### ハマったポイント
+
+- **グリフ名の衝突**: FontForgeが自動生成する `.notdef`/`.null`/
+  `nonmarkingreturn` は多くのフォントに同名グリフとしてすでに存在する。
+  `merge_glyphs.py` は `sente-`/`gote-` で始まるグリフだけを対象にすることで回避している
+- **可変フォントの`gvar`テーブル**: `gvar` はフォント内の全グリフ分の
+  エントリが揃っている前提で読み書きされる。追加したPUAグリフの分を
+  登録せずにいると、グリフ数の不一致で `gvar` の解釈全体が壊れ、
+  COLR(色)や一部グリフの表示がおかしくなる(実際にこれで色化けと
+  文字の欠落が起きた)。追加グリフには空の変形データ(`variations[name] = []`
+  = ウェイトを変えても形が変わらない)を明示的に登録して回避している
+- **CPALのColorは(blue, green, red, alpha)の並び**: fontToolsの
+  `Color` namedtupleは、CPALバイナリ形式に合わせてBGRA順のフィールドを
+  持つ。位置的に`tuple(c for c in color)`のようにタプル展開するとRとBが
+  入れ替わって色化けする。`.red`/`.green`/`.blue`/`.alpha`のように
+  フィールド名でアクセスすること
+- ベースフォントの実際の等幅セル幅は `hmtx` の 'A' 等から推定している
+  (`unitsPerEm`はフォントごとに異なるので、駒グリフはその比率でスケールし、
+  半角文字ちょうど2つ分の送り幅になるよう調整している)
+
 ## コードポイント対応表
 
 | 駒種 | key | 先手 | 後手 |
@@ -167,9 +234,12 @@ GUIアプリは別、CLIのみで足りる)。
 ## 次の工程(未着手)
 
 1. Ghostty / kitty / iTerm2 など他のターミナルでも表示確認する
-   (現時点ではTerminal.appのみ確認済み)
+   (現時点ではTerminal.appのみ確認済み)。それぞれの「特定コードポイント
+   だけ別フォントを使う」設定のスニペットを書いてここに残す
 2. デザインが最終確定したら、開発用の `FlashShogiPuaDevN` ではなく正式名で
    ビルドし直す
 3. 気になる駒(特に画数の多い龍・馬など)があれば個別に調整する
+4. 配布(公開)する場合、`merge_glyphs.py` の使い方と対応表を独立した
+   ユーザー向け手順としてまとめる(Terminal.appユーザー向け)
 
 推奨ターミナル優先順位: Ghostty > kitty > iTerm2 > Terminal.app(補助的)。
