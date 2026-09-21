@@ -11,8 +11,8 @@ class FlashShogiTest < Minitest::Test
     @puzzles = PuzzleStore.load(DATA_PATH)
   end
 
-  def test_loads_five_puzzles
-    assert_equal 5, @puzzles.size
+  def test_loads_all_puzzles
+    assert_equal 20, @puzzles.size
   end
 
   def test_each_puzzle_has_required_fields
