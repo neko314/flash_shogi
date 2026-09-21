@@ -43,6 +43,27 @@ end
 sente_cells = ORDER.map { |k| card(k, "sente") }.join
 gote_cells = ORDER.map { |k| card(k, "gote") }.join
 
+def size_check_row(key)
+  svg = read_svg("sente-#{key}")
+  sizes = [56, 32, 22, 16]
+  cells = sizes.map do |px|
+    <<~HTML
+      <div class="size-cell">
+        <div class="size-glyph" style="width:#{px}px;height:#{px}px">#{svg}</div>
+        <span>#{px}px</span>
+      </div>
+    HTML
+  end.join
+  <<~HTML
+    <div class="size-row">
+      <span class="size-row-label">#{LABELS.fetch(key)}</span>
+      <div class="size-cells">#{cells}</div>
+    </div>
+  HTML
+end
+
+size_check_rows = %w[narikyo narikei narigin].map { |k| size_check_row(k) }.join
+
 html = <<~HTML
   <title>駒グリフ台帳</title>
   <style>
@@ -180,6 +201,48 @@ html = <<~HTML
       font-size: 12px;
       color: var(--ink-soft);
     }
+
+    .size-check {
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .size-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .size-row-label {
+      width: 44px;
+      flex: 0 0 auto;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .size-cells {
+      display: flex;
+      align-items: flex-end;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .size-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .size-glyph svg { width: 100%; height: 100%; display: block; }
+    .size-glyph svg path { stroke: var(--ink); }
+    .size-glyph svg text { fill: var(--ink); }
+    .size-cell span {
+      font-size: 10px;
+      color: var(--ink-soft);
+      font-variant-numeric: tabular-nums;
+    }
   </style>
 
   <div class="wrap">
@@ -192,6 +255,16 @@ html = <<~HTML
         ここから SVG を手描きデザインに差し替えて、同じファイル名で font/svg/ を上書きすれば見た目が更新されます。
       </p>
     </header>
+
+    <section>
+      <div class="section-head">
+        <h2>成香・成桂・成銀の縮小確認</h2>
+        <span>ターミナルの文字サイズを想定</span>
+      </div>
+      <div class="size-check">
+        #{size_check_rows}
+      </div>
+    </section>
 
     <section>
       <div class="section-head">

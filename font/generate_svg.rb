@@ -15,21 +15,24 @@ require "fileutils"
 OUT_DIR = File.join(__dir__, "svg")
 
 # 4-6-2: 駒種インデックス順
+# 成香・成桂・成銀は「小さい"成" + 大きい地の文字」のバッジ方式にする。
+# 二文字を均等な大きさで積むと、実際のフォントサイズで表示したときに
+# 判別の決め手になる地の文字(香/桂/銀)が小さくなりすぎて読み取りにくいため。
 PIECES = [
-  { key: "fu",       label: %w[歩],   codepoint_offset: 0x00 },
-  { key: "kyo",       label: %w[香],   codepoint_offset: 0x01 },
-  { key: "kei",       label: %w[桂],   codepoint_offset: 0x02 },
-  { key: "gin",       label: %w[銀],   codepoint_offset: 0x03 },
-  { key: "kin",       label: %w[金],   codepoint_offset: 0x04 },
-  { key: "kaku",      label: %w[角],   codepoint_offset: 0x05 },
-  { key: "hisha",     label: %w[飛],   codepoint_offset: 0x06 },
-  { key: "gyoku",     label: %w[玉],   codepoint_offset: 0x07 },
-  { key: "to",        label: %w[と],   codepoint_offset: 0x08 },
-  { key: "narikyo",   label: %w[成 香], codepoint_offset: 0x09 },
-  { key: "narikei",   label: %w[成 桂], codepoint_offset: 0x0A },
-  { key: "narigin",   label: %w[成 銀], codepoint_offset: 0x0B },
-  { key: "uma",       label: %w[馬],   codepoint_offset: 0x0C },
-  { key: "ryu",       label: %w[龍],   codepoint_offset: 0x0D },
+  { key: "fu",       label: "歩",                         codepoint_offset: 0x00 },
+  { key: "kyo",      label: "香",                         codepoint_offset: 0x01 },
+  { key: "kei",      label: "桂",                         codepoint_offset: 0x02 },
+  { key: "gin",      label: "銀",                         codepoint_offset: 0x03 },
+  { key: "kin",      label: "金",                         codepoint_offset: 0x04 },
+  { key: "kaku",     label: "角",                         codepoint_offset: 0x05 },
+  { key: "hisha",    label: "飛",                         codepoint_offset: 0x06 },
+  { key: "gyoku",    label: "玉",                         codepoint_offset: 0x07 },
+  { key: "to",       label: "と",                         codepoint_offset: 0x08 },
+  { key: "narikyo",  label: { badge: "成", main: "香" }, codepoint_offset: 0x09 },
+  { key: "narikei",  label: { badge: "成", main: "桂" }, codepoint_offset: 0x0A },
+  { key: "narigin",  label: { badge: "成", main: "銀" }, codepoint_offset: 0x0B },
+  { key: "uma",      label: "馬",                         codepoint_offset: 0x0C },
+  { key: "ryu",      label: "龍",                         codepoint_offset: 0x0D },
 ].freeze
 
 SENTE_BASE = 0xE000
@@ -47,18 +50,27 @@ end
 # 文字そのものの中心として扱わせ、その y を重心に合わせることで駒の中に文字が
 # 収まって見えるようにする。
 GLYPH_CENTER_Y = 57
+BADGE_Y = 21
+BADGE_SIZE = 15
+MAIN_SIZE = 46
+
+def text_node(char, y:, size:)
+  %(<text x="50" y="#{y}" font-size="#{size}" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{char}</text>)
+end
 
 def text_markup(label)
-  if label.size == 1
-    <<~SVG
-      <text x="50" y="#{GLYPH_CENTER_Y}" font-size="46" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{label[0]}</text>
-    SVG
+  if label.is_a?(Hash)
+    [
+      text_node(label.fetch(:badge), y: BADGE_Y, size: BADGE_SIZE),
+      text_node(label.fetch(:main), y: GLYPH_CENTER_Y, size: MAIN_SIZE),
+    ].join("\n")
   else
-    <<~SVG
-      <text x="50" y="#{GLYPH_CENTER_Y - 17}" font-size="30" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{label[0]}</text>
-      <text x="50" y="#{GLYPH_CENTER_Y + 17}" font-size="30" font-family="#{FONT_STACK}" font-weight="700" fill="#000" text-anchor="middle" dominant-baseline="central">#{label[1]}</text>
-    SVG
+    text_node(label, y: GLYPH_CENTER_Y, size: MAIN_SIZE)
   end
+end
+
+def plain_label(label)
+  label.is_a?(Hash) ? "#{label[:badge]}#{label[:main]}" : label
 end
 
 def svg_document(label, rotate:)
@@ -87,8 +99,8 @@ PIECES.each do |piece|
   File.write(File.join(OUT_DIR, "#{sente_name}.svg"), svg_document(piece[:label], rotate: false))
   File.write(File.join(OUT_DIR, "#{gote_name}.svg"), svg_document(piece[:label], rotate: true))
 
-  manifest << { name: sente_name, codepoint: sente_cp, label: piece[:label].join }
-  manifest << { name: gote_name, codepoint: gote_cp, label: piece[:label].join }
+  manifest << { name: sente_name, codepoint: sente_cp, label: plain_label(piece[:label]) }
+  manifest << { name: gote_name, codepoint: gote_cp, label: plain_label(piece[:label]) }
 end
 
 puts "generated #{manifest.size} svg files into #{OUT_DIR}"
