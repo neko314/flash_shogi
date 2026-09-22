@@ -15,15 +15,28 @@ def parse_theme(argv)
   value.to_sym
 end
 
+def parse_seconds(argv)
+  seconds_arg = argv.find { |a| a.start_with?("--seconds=") }
+  return CLI::DISPLAY_SECONDS unless seconds_arg
+
+  value = seconds_arg.split("=", 2).last
+  unless value =~ /\A[1-9]\d*\z/
+    warn "表示秒数は1以上の整数で指定してください: #{value}"
+    exit 1
+  end
+  value.to_i
+end
+
 if ARGV.include?("--help") || ARGV.include?("-h")
   puts <<~USAGE
-    使い方: flash_shogi [--theme=text|pua]
+    使い方: flash_shogi [--theme=text|pua] [--seconds=N]
 
-      --theme=text  通常の漢字駒で表示します（デフォルト）
-      --theme=pua   PUA(私用領域)に割り当てた自作グリフフォントで表示します
-                    ※ 対応フォントを導入したターミナルでのみ正しく表示されます
+      --theme=text    通常の漢字駒で表示します（デフォルト）
+      --theme=pua     PUA(私用領域)に割り当てた自作グリフフォントで表示します
+                      ※ 対応フォントを導入したターミナルでのみ正しく表示されます
+      --seconds=N     盤面の表示秒数を指定します（デフォルト: #{CLI::DISPLAY_SECONDS}秒）
   USAGE
   exit 0
 end
 
-CLI.new(theme: parse_theme(ARGV)).run
+CLI.new(theme: parse_theme(ARGV), seconds: parse_seconds(ARGV)).run

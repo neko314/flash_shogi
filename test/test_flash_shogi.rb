@@ -71,4 +71,9 @@ class FlashShogiTest < Minitest::Test
     assert_equal 3, cli.instance_variable_get(:@puzzles).size
   end
 
+  def test_cli_accepts_custom_seconds
+    cli = CLI.new(data_path: DATA_PATH, seconds: 10)
+
+    assert_equal 10, cli.instance_variable_get(:@seconds)
+  end
 end

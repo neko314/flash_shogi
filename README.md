@@ -38,6 +38,12 @@ ruby bin/flash_shogi --theme=text   # 通常の漢字駒表示（デフォルト
 ruby bin/flash_shogi --theme=pua    # PUA(私用領域)の自作グリフフォントで表示
 ```
 
+## 表示秒数の変更
+
+```bash
+ruby bin/flash_shogi --seconds=30   # 盤面の表示時間を30秒にする（デフォルト: 60秒）
+```
+
 `--theme=pua` は、PUA (`U+E000`–`U+E10D` ほか) に将棋駒グリフを割り当てた
 自作フォント(`font/build/FlashShogiPua.ttf`、COLR/CPALカラーフォントとして
 完成済み)が端末側に導入済みであることを前提としています。
