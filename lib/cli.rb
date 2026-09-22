@@ -6,10 +6,11 @@ require_relative "game"
 class CLI
   DEFAULT_DATA_PATH = File.join(__dir__, "..", "data", "puzzles.json")
   DISPLAY_SECONDS = 60
+  QUESTION_COUNT = 5
 
-  def initialize(theme: :text, data_path: DEFAULT_DATA_PATH, seconds: DISPLAY_SECONDS)
+  def initialize(theme: :text, data_path: DEFAULT_DATA_PATH, seconds: DISPLAY_SECONDS, question_count: QUESTION_COUNT)
     @renderer = Renderer.new(theme: theme)
-    @puzzles = PuzzleStore.load(data_path)
+    @puzzles = PuzzleStore.load(data_path).sample(question_count)
     @game = Game.new(@puzzles)
     @seconds = seconds
     @score = 0

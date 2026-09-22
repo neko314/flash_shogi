@@ -3,6 +3,7 @@ require_relative "../lib/puzzle_store"
 require_relative "../lib/sfen"
 require_relative "../lib/renderer"
 require_relative "../lib/game"
+require_relative "../lib/cli"
 
 class FlashShogiTest < Minitest::Test
   DATA_PATH = File.join(__dir__, "..", "data", "puzzles.json")
@@ -55,4 +56,19 @@ class FlashShogiTest < Minitest::Test
     assert_includes round.choices, puzzle.answer
     assert_equal puzzle.answer, round.choices[round.correct_index]
   end
+
+  def test_cli_defaults_to_five_random_puzzles
+    cli = CLI.new(data_path: DATA_PATH)
+    puzzles = cli.instance_variable_get(:@puzzles)
+
+    assert_equal 5, puzzles.size
+    assert_equal puzzles.map(&:id).uniq.size, puzzles.size
+  end
+
+  def test_cli_accepts_custom_question_count
+    cli = CLI.new(data_path: DATA_PATH, question_count: 3)
+
+    assert_equal 3, cli.instance_variable_get(:@puzzles).size
+  end
+
 end
