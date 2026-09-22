@@ -1,7 +1,6 @@
 {
   "palette": {
     "body": "#f5e2b8",
-    "border": "#b9824a",
     "ink": "#4a3016",
     "promoted_ink": "#c0392b"
   },
@@ -14,10 +13,6 @@
         {
           "glyph": "sente-fu.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-fu.border",
-          "color": "border"
         },
         {
           "glyph": "sente-fu.char",
@@ -35,10 +30,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-fu.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-fu.char",
           "color": "ink"
         }
@@ -52,10 +43,6 @@
         {
           "glyph": "sente-kyo.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-kyo.border",
-          "color": "border"
         },
         {
           "glyph": "sente-kyo.char",
@@ -73,10 +60,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-kyo.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-kyo.char",
           "color": "ink"
         }
@@ -90,10 +73,6 @@
         {
           "glyph": "sente-kei.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-kei.border",
-          "color": "border"
         },
         {
           "glyph": "sente-kei.char",
@@ -111,10 +90,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-kei.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-kei.char",
           "color": "ink"
         }
@@ -128,10 +103,6 @@
         {
           "glyph": "sente-gin.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-gin.border",
-          "color": "border"
         },
         {
           "glyph": "sente-gin.char",
@@ -149,10 +120,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-gin.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-gin.char",
           "color": "ink"
         }
@@ -166,10 +133,6 @@
         {
           "glyph": "sente-kin.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-kin.border",
-          "color": "border"
         },
         {
           "glyph": "sente-kin.char",
@@ -187,10 +150,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-kin.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-kin.char",
           "color": "ink"
         }
@@ -204,10 +163,6 @@
         {
           "glyph": "sente-kaku.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-kaku.border",
-          "color": "border"
         },
         {
           "glyph": "sente-kaku.char",
@@ -225,10 +180,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-kaku.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-kaku.char",
           "color": "ink"
         }
@@ -242,10 +193,6 @@
         {
           "glyph": "sente-hisha.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-hisha.border",
-          "color": "border"
         },
         {
           "glyph": "sente-hisha.char",
@@ -263,10 +210,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-hisha.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-hisha.char",
           "color": "ink"
         }
@@ -280,10 +223,6 @@
         {
           "glyph": "sente-gyoku.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-gyoku.border",
-          "color": "border"
         },
         {
           "glyph": "sente-gyoku.char",
@@ -301,10 +240,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-gyoku.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-gyoku.char",
           "color": "ink"
         }
@@ -318,10 +253,6 @@
         {
           "glyph": "sente-to.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-to.border",
-          "color": "border"
         },
         {
           "glyph": "sente-to.char",
@@ -339,10 +270,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-to.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-to.char",
           "color": "promoted_ink"
         }
@@ -356,10 +283,6 @@
         {
           "glyph": "sente-narikyo.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-narikyo.border",
-          "color": "border"
         },
         {
           "glyph": "sente-narikyo.char",
@@ -377,10 +300,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-narikyo.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-narikyo.char",
           "color": "promoted_ink"
         }
@@ -394,10 +313,6 @@
         {
           "glyph": "sente-narikei.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-narikei.border",
-          "color": "border"
         },
         {
           "glyph": "sente-narikei.char",
@@ -415,10 +330,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-narikei.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-narikei.char",
           "color": "promoted_ink"
         }
@@ -432,10 +343,6 @@
         {
           "glyph": "sente-narigin.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-narigin.border",
-          "color": "border"
         },
         {
           "glyph": "sente-narigin.char",
@@ -453,10 +360,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-narigin.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-narigin.char",
           "color": "promoted_ink"
         }
@@ -470,10 +373,6 @@
         {
           "glyph": "sente-uma.body",
           "color": "body"
-        },
-        {
-          "glyph": "sente-uma.border",
-          "color": "border"
         },
         {
           "glyph": "sente-uma.char",
@@ -491,10 +390,6 @@
           "color": "body"
         },
         {
-          "glyph": "gote-uma.border",
-          "color": "border"
-        },
-        {
           "glyph": "gote-uma.char",
           "color": "promoted_ink"
         }
@@ -510,10 +405,6 @@
           "color": "body"
         },
         {
-          "glyph": "sente-ryu.border",
-          "color": "border"
-        },
-        {
           "glyph": "sente-ryu.char",
           "color": "promoted_ink"
         }
@@ -527,10 +418,6 @@
         {
           "glyph": "gote-ryu.body",
           "color": "body"
-        },
-        {
-          "glyph": "gote-ryu.border",
-          "color": "border"
         },
         {
           "glyph": "gote-ryu.char",

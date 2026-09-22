@@ -34,8 +34,8 @@ OUT_PATH = os.path.join(os.path.dirname(__file__), "glyph_paths.json")
 # 100x100 ビューポート内で、文字を安全に収めてよい範囲(五角形の内側、
 # 駒尖や縁取りに触れない余白を見込んだ領域)。地の文字は五角形の肩から下、
 # バッジは五角形の尖った先端の下あたりに収める。
-MAIN_BOX = (10, 25, 90, 87)   # (x0, y0, x1, y1)
-BADGE_BOX = (36, 8, 64, 27)
+MAIN_BOX = (7, 22, 93, 90)   # (x0, y0, x1, y1)
+BADGE_BOX = (34, 5, 66, 25)
 
 
 def fit_transform(bbox, target, rotate180):

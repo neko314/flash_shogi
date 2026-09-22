@@ -54,7 +54,7 @@ PROMOTED_INK = "#c0392b" # 成駒の文字色(赤)
 # --- 角を丸めすぎない五角形(先手=正位置、駒尖が上)のパス。100x100基準。-----
 # 各頂点を半径 radius だけ手前で切り、頂点そのものを制御点にした二次ベジェで結ぶ。
 
-PENTAGON_POINTS = [[50, 3], [91, 23], [97, 97], [3, 97], [9, 23]].freeze
+PENTAGON_POINTS = [[50, 1], [94, 21], [99, 99], [1, 99], [6, 21]].freeze
 ROUND_RADIUS = 4
 
 def rounded_polygon_path(points, radius)
@@ -131,14 +131,13 @@ def svg_document(label, promoted:, rotate:)
   # 巻き方向次第で文字が駒の塗りに埋もれて消えてしまう(要検証で確認済み)。
   # 一方 stroke(線)は取り込み時に中空のリング形状として正しく変換される。
   # そこで五角形は「線のみ・塗りなし」にし、文字(塗りのみ)と重ならせない
-  # ことで、単色フォントでも両方がちゃんと見えるようにしている。
-  # クリーム地(#{FILL})や赤字は、実フォントに反映するには別途 COLR/CPAL
-  # カラーフォント化が必要(font/README.md 参照)。色の値自体はSVGソースに
-  # 残しておき、その際の参照用にする。
+  # ことで、単色フォントでも両方がちゃんと見えるようにしている。これは
+  # COLR非対応環境向けのフォールバック限定の技術的事情であり、デザイン上の
+  # 縁取り(COLRのbodyレイヤーには含めていない)とは無関係。
   <<~SVG
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <g>
-        <path d="#{pentagon}" fill="none" stroke="#{STROKE}" stroke-width="3" stroke-linejoin="round"/>
+        <path d="#{pentagon}" fill="none" stroke="#{STROKE}" stroke-width="2" stroke-linejoin="round"/>
         #{text_markup(label, color: color, rotate: rotate).strip}
       </g>
     </svg>
@@ -147,11 +146,11 @@ end
 
 # --- COLR/CPAL用のレイヤー別SVG -------------------------------------------
 # COLRはレイヤー(=別グリフ)ごとに1色を割り当てて重ね描きする方式なので、
-# 「塗りの地色」「線の縁取り」「文字」を独立した3枚のSVG(=3グリフ)として
-# 書き出す。この方式なら重なり(fillの巻き方向)を気にする必要がない。
+# 「塗りの地色」「文字」を独立した2枚のSVG(=2グリフ)として書き出す。
+# 縁取り(border)は廃止し、五角形の塗り(body)だけにした。これで駒の枠線に
+# 使っていた分の面積も塗り・文字の表示に使えるようになる。
 PALETTE = {
   body: FILL,
-  border: STROKE,
   ink: INK,
   promoted_ink: PROMOTED_INK,
 }.freeze
@@ -161,15 +160,6 @@ def body_svg(rotate:)
   <<~SVG
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <path d="#{pentagon}" fill="#000"/>
-    </svg>
-  SVG
-end
-
-def border_svg(rotate:)
-  pentagon = rotate ? PENTAGON_PATH_GOTE : PENTAGON_PATH
-  <<~SVG
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <path d="#{pentagon}" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
     </svg>
   SVG
 end
@@ -201,9 +191,8 @@ PIECES.each do |piece|
     # 単色版(フォールバック用の輪郭 + プレビュー用)
     File.write(File.join(OUT_DIR, "#{name}.svg"), svg_document(piece[:label], promoted: piece[:promoted], rotate: rotate))
 
-    # COLR用レイヤー3枚
+    # COLR用レイヤー2枚
     File.write(File.join(LAYER_DIR, "#{name}.body.svg"), body_svg(rotate: rotate))
-    File.write(File.join(LAYER_DIR, "#{name}.border.svg"), border_svg(rotate: rotate))
     File.write(File.join(LAYER_DIR, "#{name}.char.svg"), char_svg(piece[:label], rotate: rotate))
   end
 
@@ -211,7 +200,6 @@ PIECES.each do |piece|
     name: sente_name, codepoint: sente_cp, label: plain_label(piece[:label]),
     layers: [
       { glyph: "#{sente_name}.body", color: :body },
-      { glyph: "#{sente_name}.border", color: :border },
       { glyph: "#{sente_name}.char", color: ink_role },
     ],
   }
@@ -219,7 +207,6 @@ PIECES.each do |piece|
     name: gote_name, codepoint: gote_cp, label: plain_label(piece[:label]),
     layers: [
       { glyph: "#{gote_name}.body", color: :body },
-      { glyph: "#{gote_name}.border", color: :border },
       { glyph: "#{gote_name}.char", color: ink_role },
     ],
   }

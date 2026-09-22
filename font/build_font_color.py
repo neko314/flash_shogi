@@ -81,7 +81,7 @@ def stage2():
         r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
         return (r, g, b, 1.0)
 
-    color_names = list(palette.keys())  # body, border, ink, promoted_ink
+    color_names = list(palette.keys())  # body, ink, promoted_ink
     color_index = {name: i for i, name in enumerate(color_names)}
     palette_colors = [hex_to_rgba(palette[name]) for name in color_names]
 
