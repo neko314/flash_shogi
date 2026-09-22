@@ -10,6 +10,7 @@ class FlashShogiTest < Minitest::Test
   DATA_PATH = File.join(__dir__, "..", "data", "puzzles.json")
 
   def setup
+    skip "data/puzzles.json が見つかりません(リポジトリには含まれていません。READMEの「問題データについて」参照)" unless File.exist?(DATA_PATH)
     @puzzles = PuzzleStore.load(DATA_PATH)
   end
 

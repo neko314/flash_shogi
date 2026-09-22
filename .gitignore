@@ -3,6 +3,10 @@
 vendor/bundle/
 .DS_Store
 
+# 問題データ(P6〜P20は出典サイトの利用規約が不明なため非公開・自己責任の
+# 個人利用限定。リポジトリには一切含めない。フォーマットはREADMEを参照)
+data/puzzles.json
+
 # font/ ビルド周り
 font/.venv/
 font/build/*.stage1.ttf
