@@ -79,6 +79,9 @@ Terminal.appには上記の「非ASCIIだけ別フォント」「Ambiguous Width
 (要確認) > Terminal.app(半角扱いのため罫線がズレる、補助的)
 
 開発中のグリフ素材・コードポイント対応表・作業状況は [`font/README.md`](font/README.md) を参照。
+駒の文字は OFL ライセンスの M PLUS 1p Black から輪郭を抽出して作成しており
+(ライセンス全文: [`font/third_party_licenses/OFL-MPLUS1p.txt`](font/third_party_licenses/OFL-MPLUS1p.txt))、
+生成物を含めてこのリポジトリに同梱・公開して問題ありません。
 
 PUAのコードポイント割り当ては `lib/renderer.rb` の `PUA_SENTE_BASE` /
 `PUA_GOTE_OFFSET` / `PUA_KIND_INDEX` にまとまっています。詳細な割り当て表は

@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """
-システムフォント(ヒラギノ明朝 ProN W6)から必要な漢字の輪郭を抽出し、
-100x100ビューポート基準の <path> d文字列(地の文字位置/バッジ位置それぞれ)
-として JSON に書き出す開発用スクリプト。CID方式のフォントでも fontTools の
-cmap 解決はUnicodeで引けるため、FontForge直接操作より確実。
+M PLUS 1p Black(OFLライセンス、商用利用・改変・再配布可)から必要な漢字の
+輪郭を抽出し、100x100ビューポート基準の <path> d文字列(地の文字位置/
+バッジ位置それぞれ)として JSON に書き出す開発用スクリプト。CID方式の
+フォントでも fontTools の cmap 解決はUnicodeで引けるため、FontForge直接
+操作より確実。
 
 文字ごとに実際の見た目のバウンディングボックスを測り、駒の中の「安全な
 範囲」いっぱいに収まるよう個別に拡大・中央寄せする(固定サイズ・固定位置
 だと、文字によって余白や重心のズレが出るため)。
+
+事前に `brew install --cask font-m-plus-1p` でフォントを導入しておくこと。
+(以前はヒラギノ角ゴシックを使っていたが、これは商用フォントで再配布の
+許諾がないため、OFLライセンスのM PLUS 1p Blackに切り替えた。これにより
+生成物[font/build/FlashShogiPua.ttfやfont/svg/*.svgなど]を公開リポジトリに
+含めてよくなった)
 
 使い方:
   font/.venv/bin/python3 font/extract_glyphs.py
@@ -22,10 +29,8 @@ from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 
-# 明朝体は線の太さに強弱があり、小さいサイズだと潰れて読みにくかったため、
-# 線の太さが均一なゴシック体に変更(視認性重視)。
-FONT_PATH = "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc"
-FONT_NUMBER = 0  # Hiragino Sans / Kaku Gothic ProN W6 (太め)
+FONT_PATH = os.path.expanduser("~/Library/Fonts/MPLUS1p-Black.ttf")
+FONT_NUMBER = 0
 
 CHARS = list("歩香桂銀金角飛玉と馬龍成全圭杏")
 

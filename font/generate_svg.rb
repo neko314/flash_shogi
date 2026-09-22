@@ -87,7 +87,7 @@ PENTAGON_PATH = rounded_polygon_path(PENTAGON_POINTS, ROUND_RADIUS)
 # 座標をあらかじめ計算しておく(下記の理由により)。
 PENTAGON_PATH_GOTE = rounded_polygon_path(PENTAGON_POINTS.map { |x, y| [100 - x, 100 - y] }, ROUND_RADIUS)
 
-# 文字は <text> ではなく、extract_glyphs.py がヒラギノ明朝 ProN W6 から
+# 文字は <text> ではなく、extract_glyphs.py が M PLUS 1p Black(OFL)から
 # 抽出済みの輪郭パス(font/glyph_paths.json)を使う。FontForge の SVG 取り込みは
 # <text> を文字として認識しないため、あらかじめパス化しておく必要がある。
 # 位置(main=中央寄り重心、badge=五角形の肩)は extract_glyphs.py 側の
