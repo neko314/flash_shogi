@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require "pty"
 require_relative "../lib/puzzle_store"
 require_relative "../lib/sfen"
 require_relative "../lib/renderer"
@@ -75,5 +76,18 @@ class FlashShogiTest < Minitest::Test
     cli = CLI.new(data_path: DATA_PATH, seconds: 10)
 
     assert_equal 10, cli.instance_variable_get(:@seconds)
+  end
+
+  def test_ctrl_c_exits_cleanly_during_countdown
+    bin = File.join(__dir__, "..", "bin", "flash_shogi")
+    PTY.spawn("ruby", bin, "--seconds=30") do |read, write, pid|
+      write.print "\n" # skip intro
+      sleep 0.3
+      Process.kill("INT", pid)
+      _, status = Process.wait2(pid)
+      assert_equal 130, status.exitstatus
+    end
+  rescue RuntimeError => e
+    skip "PTYが利用できない環境のためスキップ: #{e.message}"
   end
 end

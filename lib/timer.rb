@@ -9,7 +9,7 @@ module Timer
   # Enter が押されたら即座に戻る。
   def self.countdown(seconds, out: $stdout)
     begin
-      $stdin.raw do |raw_stdin|
+      $stdin.raw(intr: true) do |raw_stdin|
         catch(:skip) do
           seconds.downto(1) do |remaining|
             out.print "\r残り #{remaining.to_s.rjust(2)} 秒 (Enterで次へ進めます) "

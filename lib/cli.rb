@@ -22,6 +22,10 @@ class CLI
       play_round(round, index)
     end
     print_result
+  rescue Interrupt
+    puts
+    puts "中断しました。"
+    exit 130
   end
 
   private
@@ -78,7 +82,7 @@ class CLI
 
   # 1文字を返す。標準入力が EOF に達した場合は nil を返す。
   def read_single_key
-    $stdin.raw { |raw_stdin| raw_stdin.getc }
+    $stdin.raw(intr: true) { |raw_stdin| raw_stdin.getc }
   rescue Errno::ENOTTY, IOError
     $stdin.gets&.strip
   end
