@@ -62,6 +62,21 @@ OFLはフォントの改変・派生物の作成・再配布を許可してい�
 
 ## ビルドパイプライン
 
+`font/build/FlashShogiPua.ttf` は完成品としてリポジトリに同梱済みなので、
+通常は自分でビルドし直す必要はない(README.mdの「導入手順」通りに配置すれば
+使える)。同梱フォントがうまく使えない場合(壊れている、信用できない、
+別の環境向けに作り直したい等)の回避策として、手元で再ビルドできるように
+してある。
+
+### 事前準備(再ビルドする場合のみ必要)
+
+```bash
+brew install fontforge                       # SVG→TTF変換に使う
+brew install --cask font-m-plus-1p           # 文字の輪郭抽出元(OFLライセンス)
+python3 -m venv font/.venv                   # fontTools用の仮想環境
+font/.venv/bin/pip install fonttools
+```
+
 自動生成なので、`.svg`/`.ttf` 系のファイルは直接編集せず、必ずスクリプト経由で
 再生成すること。フロー:
 
@@ -96,10 +111,6 @@ font/.venv/bin/python3 font/build_font_color.py stage2
 # 5. インストール(上書き)
 cp font/build/FlashShogiPua.ttf ~/Library/Fonts/FlashShogiPua.ttf
 ```
-
-`font/.venv/` は `fontTools` 用の venv(`python3 -m venv font/.venv && font/.venv/bin/pip install fonttools`
-で作成済み)。FontForge自体は Homebrew の CLI 版(`brew install fontforge`、
-GUIアプリは別、CLIのみで足りる)。
 
 ### なぜこんなに手順が分かれているか(ハマったポイント)
 
