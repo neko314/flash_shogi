@@ -2,8 +2,9 @@
 #
 # 使い方:
 #   irb -r ./font/koma_irb.rb
-#   irb(main)> koma("sente-gyoku")
-#   irb(main)> koma_list  # 名前一覧を確認したいとき
+#   irb(main)> sente_gyoku       # 括弧・クオーテーションなしで直接呼べる
+#   irb(main)> koma("sente-gyoku") # 駒名(ハイフン区切り)を文字列で渡す版
+#   irb(main)> koma_list          # 名前一覧を確認したいとき
 
 require "json"
 
@@ -24,6 +25,12 @@ def koma_list
   nil
 end
 
+# ハイフンはRubyの演算子と衝突するため、駒名ごとに sente_gyoku のような
+# アンダースコア区切りのメソッドを動的に定義し、括弧なしで直接呼べるようにする。
+KOMA_CODEPOINTS.each_key do |name|
+  define_singleton_method(name.tr("-", "_")) { koma(name) }
+end
+
 IRB.conf[:INSPECT_MODE] = false if defined?(IRB) # 結果表示からクオーテーションを外す(to_s表示にする)
 
-puts "koma(\"sente-gyoku\") のように駒名を指定すると表示されます。koma_list で一覧表示できます。"
+puts "sente_gyoku のように駒名(アンダースコア区切り)を直接打つと表示されます。koma_list で一覧表示できます。"
